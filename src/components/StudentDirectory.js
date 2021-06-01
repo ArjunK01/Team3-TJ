@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import NavigateButton from './NavigateButton';
 import DirectoryHeader from './DirectoryHeader';
 import ClassList from './ClassList';
 
@@ -34,7 +35,7 @@ const StudentDirectory = () => {
             <DirectoryHeader headerName="Student Directory">
                 <div>
                     {students && students.map((student) => {
-                        return <div className="container m-4" key={student.id}>
+                        return <div className="container mx-4 my-5" key={student.id}>
                             <div className="row">
                                 <h2 className="h5">{student.firstName} {student.lastName}</h2>
                             </div>
@@ -44,10 +45,14 @@ const StudentDirectory = () => {
                                 <div className="row">Birthday: {student.birthday ? student.birthday : "N/A"}</div>
                                 <div className="row">Graduation Year: {student.gradYear ? student.gradYear : "N/A"}</div>
                                 <div className="row">
-                                    Enrolled Classes:
-                                    <ClassList email={student.email} person="student" />
+                                    <div className="container row">Enrolled Classes:</div>
+                                    <div className="container">
+                                        <ClassList email={student.email} person="student" />
+                                    </div>
                                 </div>
-                                <div className="row"><a href={`/student/${student.id}`}>Visit Student Profile</a></div>
+                            </div>
+                            <div className="row justify-content-left mt-3">
+                                <NavigateButton buttonName="Visit Student Profile" url={`/student/${student.id}`}></NavigateButton>
                             </div>
                         </div>
                     })}

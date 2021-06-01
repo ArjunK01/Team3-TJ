@@ -14,7 +14,7 @@ const DirectoryHeader = ({ headerName, children }) => {
                     {children}
                 </div>
             </div>
-            <div className="row justify-content-center">
+            <div className="row justify-content-center m-4">
                 <NavigateButton buttonName="Back To Home" url="/" />
             </div>
         </div>
