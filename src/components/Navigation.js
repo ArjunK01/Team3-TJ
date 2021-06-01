@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Auth from "./Auth";
+import Dashboard from "./Dashboard";
 
 const Navigation = () => {
   return (
@@ -78,6 +79,7 @@ const Navigation = () => {
             {
               //Change to component
             }
+            <Dashboard />
           </Route>
           <Route path="/login">
             {
