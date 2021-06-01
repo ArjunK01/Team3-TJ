@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,8 +12,35 @@ import firebase from "../firebase";
 import { AuthContext } from "../context/AuthProvider";
 import ClassPage from "./ClassPage"
 
+import Home from "./Home";
+import StudentDirectory from "./StudentDirectory";
+import TeacherDirectory from "./TeacherDirectory";
+
+import { ClassesContext } from "../context/ClassesProvider";
+
 const Navigation = () => {
   let { user } = useContext(AuthContext);
+  const { setClasses } = useContext(ClassesContext);
+
+  useEffect(() => {
+    try {
+      fetch(`http://localhost:8000/classes`)
+        .then(resp => {
+          return resp.json();
+        })
+        .then(obj => {
+          if (obj.length === 0) {
+            setClasses([]);
+          } else {
+            console.log(obj);
+            setClasses(obj);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <div>
       <Router>
@@ -84,16 +111,16 @@ const Navigation = () => {
         </nav>
         {/* ROUTING */}
         <Switch>
-          <Route path="/teacherdirectory">
-            {
-              //Change to component
-            }
-          </Route>
-          <Route path="/studentdirectory">
-            {
-              //Change to component
-            }
-          </Route>
+          <Route
+            path="/teacherdirectory"
+            exact
+            component={TeacherDirectory}
+          ></Route>
+          <Route
+            path="/studentdirectory"
+            exact
+            component={StudentDirectory}
+          ></Route>
           <Route path="/calendar">
             {
               //Change to component
@@ -121,7 +148,9 @@ const Navigation = () => {
             }
             {user ? <Redirect to="/dashboard" /> : <Auth />}
           </Route>
-          <Route path="/"></Route>
+          <Route path="/">
+            {user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+          </Route>
         </Switch>
       </Router>
     </div>

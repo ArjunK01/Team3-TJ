@@ -58,6 +58,17 @@ app.get("/events", async (req, res) => {
   res.send(events)
 })
 
+app.get("/classes", async (req, res) => {
+  const snapshot = await db.collection("Classes").get();
+
+  const classes = [];
+
+  snapshot.forEach((c) => {
+    classes.push({...c.data(), id: c.id});
+  })
+  res.send(classes);
+})
+
 app.post("/students/add", async (req, res) => {
   const { birthday, email, fName, gender, gradYear, lName } = req.body;
 
