@@ -36,6 +36,17 @@ app.get("/staff", async (req, res) => {
   res.send(staff);
 })
 
+app.get("/events", async (req, res) => {
+  const snapshot = await db.collection("Events").get();
+  
+  const events = [];
+
+  snapshot.forEach((e) => {
+    events.push({...e.data(), id: e.id})
+  })
+  res.send(events)
+})
+
 app.post("/students/add", async (req, res) => {
   const {birthday, email, fName, gender, gradYear, lName} = req.body;
 
@@ -82,6 +93,28 @@ app.post("/staff/add", async (req, res) => {
       console.log("This" + status + "is already in the database!");
   }
 })
+
+app.post("/events/add", async (req, reS) => {
+  const {date, description, eventType} = req.body;
+
+  let query = db.collection("Events");
+  const snapshot = await query.get();
+  if (snapshot.empty) {
+    const resp = await db.collection("Events").add({
+      date,
+      description, 
+      eventType
+    });
+    console.log("Added " + eventType + "with description: " + description + " on " + date);
+    res.sendStatus(200);
+  }
+  else {
+    res.sendStatus(400);
+    console.log("This " + eventType + " is already in the database!")
+  }
+})
+
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}...`);
