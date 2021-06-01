@@ -1,14 +1,16 @@
 .authContainer {
   display: flex;
   justify-content: center;
+  margin-top: 32px;
 }
 
 .authFormContainer {
+  width: 300px;
 }
 
 .loginSwitchBtn {
   cursor: pointer;
-  padding: 6px 12px;
+  margin-top: 12px;
 }
 
 .authForm {
@@ -17,5 +19,57 @@
 }
 
 .authSubmitBtn {
+  background-color: black;
+  display: flex;
+  justify-content: center;
   cursor: pointer;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 16px;
+}
+
+.logInHeader {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  letter-spacing: 0.8px;
+}
+
+.nameInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nameInput > * {
+  width: 48%;
+}
+
+.authInput {
+  margin: 0;
+}
+
+.statusInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.statusInput > * {
+  width: 48%;
+  cursor: pointer;
+  border: 1px solid #ced4da;
+  display: flex;
+  justify-content: center;
+  padding: 5px 0px;
+  border-radius: 3px;
+  color: #6d757d;
+}
+
+.errorMessage {
+  font-size: 14px;
+  margin-bottom: 0;
 }

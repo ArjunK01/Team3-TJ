@@ -1,9 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import Auth from "./Auth";
 import Dashboard from "./Dashboard";
+import firebase from "../firebase";
+import { AuthContext } from "../context/AuthProvider";
 
 const Navigation = () => {
+  let { user } = useContext(AuthContext);
   return (
     <div>
       <Router>
@@ -24,28 +33,52 @@ const Navigation = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">
-                  Class Dashboard
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/teacherdirectory">
-                  Teacher Directory
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/studentdirectory">
-                  Student Directory
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/calendar">
-                  Calendar
-                </Link>
-              </li>
-            </ul>
+            {user ? (
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard">
+                    Class Dashboard
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/teacherdirectory">
+                    Teacher Directory
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/studentdirectory">
+                    Student Directory
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/calendar">
+                    Calendar
+                  </Link>
+                </li>{" "}
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/login"
+                    onClick={() => firebase.auth().signOut()}
+                  >
+                    Sign Out
+                  </Link>
+                </li>{" "}
+              </ul>
+            ) : (
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/studentdirectory">
+                    Student Directory
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Log In
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         </nav>
         {/* ROUTING */}
@@ -85,7 +118,7 @@ const Navigation = () => {
             {
               //Change to component
             }
-            <Auth />
+            {user ? <Redirect to="/dashboard" /> : <Auth />}
           </Route>
           <Route path="/"></Route>
         </Switch>
