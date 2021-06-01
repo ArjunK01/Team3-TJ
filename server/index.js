@@ -25,26 +25,15 @@ app.get("/students", async (req, res) => {
   res.send(students);
 })
 
-app.get("/teachers", async (req, res) => {
-  const snapshot = await db.collection("Teachers").get();
+app.get("/staff", async (req, res) => {
+  const snapshot = await db.collection("Staff").get();
 
-  const teachers = [];
+  const staff = [];
 
   snapshot.forEach((t) => {
-    teachers.push({...t.data(), id: t.id});
+    staff.push({...t.data(), id: t.id});
   })
-  res.send(teachers);
-})
-
-app.get("/admins", async (req, res) => {
-  const snapshot = await db.collection("Admins").get();
-
-  const admins = [];
-
-  snapshot.forEach((a) => {
-    admins.push({...a.data(), id: a.id});
-  })
-  res.send(admins);
+  res.send(staff);
 })
 
 app.post("/students/add", async (req, res) => {
@@ -52,8 +41,7 @@ app.post("/students/add", async (req, res) => {
 
   let query = db.collection("Students").where("email", "==", email);
   const snapshot = await query.get();
-  if(snapshot.empty)
-  {
+  if(snapshot.empty) {
       const resp = await db.collection("Students").add({
           birthday,
           email,
@@ -66,13 +54,34 @@ app.post("/students/add", async (req, res) => {
       console.log("Added", fName + lName + " with ID: ", resp.id);
       res.sendStatus(200);
   }
-  else
-  {
+  else {
       res.sendStatus(400);
       console.log("This student is already enrolled!");
   }
-
 });
+
+app.post("/staff/add", async (req, res) => {
+  const {email, fName, lName, status} = req.body;
+
+  let query = db.collection("Students").where("email", "==", email);
+  const snapshot = await query.get();
+  if(snapshot.empty)
+  {
+      const resp = await db.collection("Students").add({
+          email,
+          fName,
+          lName,
+      });
+
+      console.log("Added", fName + lName + " with ID: ", resp.id);
+      res.sendStatus(200);
+  }
+  else
+  {
+      res.sendStatus(400);
+      console.log("This" + status + "is already in the database!");
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}...`);
