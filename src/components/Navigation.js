@@ -1,5 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from './Home';
+import StudentDirectory from './StudentDirectory';
+import TeacherDirectory from './TeacherDirectory';
+
 
 const Navigation = () => {
     return (
@@ -32,12 +36,9 @@ const Navigation = () => {
                 </nav>
                 {/* ROUTING */}
                 <Switch>
-                    <Route path="/teacherdirectory">
-                        {
-                            //Change to component
-                        }
+                    <Route path="/teacherdirectory" exact component={TeacherDirectory}>
                     </Route>
-                    <Route path="/studentdirectory">
+                    <Route path="/studentdirectory" exact component={StudentDirectory}>
                         {
                             //Change to component
                         }
@@ -62,7 +63,7 @@ const Navigation = () => {
                             //Change to component
                         }
                     </Route>
-                    <Route path="/"></Route>
+                    <Route path="/" exact component={Home}></Route>
                 </Switch>
             </Router>
         </div>
