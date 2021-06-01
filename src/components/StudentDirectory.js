@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import DirectoryHeader from './DirectoryHeader';
+import ClassList from './ClassList';
 
 import { ClassesContext } from '../context/ClassesProvider';
 
@@ -38,10 +39,15 @@ const StudentDirectory = () => {
                                 <h2 className="h5">{student.firstName} {student.lastName}</h2>
                             </div>
                             <div className="container">
-                                <div className="row">Gender: {student.gender}</div>
-                                <div className="row">Email: {student.email}</div>
-                                <div className="row">Birthday: {student.birthday}</div>
-                                <div className="row">Graduation Year: {student.gradYear}</div>
+                                <div className="row">Gender: {student.gender ? student.gender : "N/A"}</div>
+                                <div className="row">Email: {student.email ? student.email : "N/A"}</div>
+                                <div className="row">Birthday: {student.birthday ? student.birthday : "N/A"}</div>
+                                <div className="row">Graduation Year: {student.gradYear ? student.gradYear : "N/A"}</div>
+                                <div className="row">
+                                    Enrolled Classes:
+                                    <ClassList email={student.email} person="student" />
+                                </div>
+                                <div className="row"><a href={`/student/${student.id}`}>Visit Student Profile</a></div>
                             </div>
                         </div>
                     })}

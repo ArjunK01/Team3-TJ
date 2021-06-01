@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DirectoryHeader from './DirectoryHeader';
+import ClassList from './ClassList';
 
 import { ClassesContext } from '../context/ClassesProvider';
 
@@ -33,10 +34,18 @@ const TeacherDirectory = () => {
             <DirectoryHeader headerName="Teacher Directory">
                 <div>
                     {teachers && teachers.map((teacher) => {
-                        return <div className="row" key={teacher.id}>
-                            <h2 className="h5">
-                                Teacher {teacher.id} First Name
-                        </h2>
+                        return <div className="container m-4" key={teacher.id}>
+                            <div className="row">
+                                <h2 className="h5">{teacher.firstName} {teacher.lastName}</h2>
+                            </div>
+                            <div className="container">
+                                <div className="row">Email: {teacher.email ? teacher.email : "N/A"}</div>
+                                <div className="row">Birthday: {teacher.birthday ? teacher.birthday : "N/A"}</div>
+                                <div className="row justify-content-left">
+                                    Classes Teaching:
+                                    <ClassList email={teacher.email} person="teacher" />
+                                </div>
+                            </div>
                         </div>
                     })}
                 </div>
