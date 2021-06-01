@@ -1,12 +1,12 @@
-import AuthProvider from "./context/AuthProvider";
+import ContextWrapper from './components/ContextWrapper';
 import Navigation from "./components/Navigation.js";
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
+      <ContextWrapper>
         <Navigation />
-      </AuthProvider>
+      </ContextWrapper>
     </div>
   );
 }

@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+
 import Home from './Home';
 import StudentDirectory from './StudentDirectory';
 import TeacherDirectory from './TeacherDirectory';
 
+import { ClassesContext } from '../context/ClassesProvider';
+
 
 const Navigation = () => {
+    const { setClasses } = useContext(ClassesContext);
+
+    useEffect(() => {
+        try {
+            fetch(`http://localhost:8000/classes`)
+                .then(
+                    resp => { return resp.json() }
+                )
+                .then((obj) => {
+                    if (obj.length === 0) {
+                        setClasses([]);
+                    }
+                    else {
+                        console.log(obj);
+                        setClasses(obj);
+                    }
+                })
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     return (
         <div>
             <Router>
