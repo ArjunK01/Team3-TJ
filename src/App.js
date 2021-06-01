@@ -1,5 +1,6 @@
 import AuthProvider from "./context/AuthProvider";
 import Navigation from "./components/Navigation.js";
+import "./App.css";
 
 function App() {
   return (
