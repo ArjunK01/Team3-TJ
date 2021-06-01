@@ -1,0 +1,21 @@
+.authContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.authFormContainer {
+}
+
+.loginSwitchBtn {
+  cursor: pointer;
+  padding: 6px 12px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.authSubmitBtn {
+  cursor: pointer;
+}
