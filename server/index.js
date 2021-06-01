@@ -14,6 +14,17 @@ app.get("/", (req, res) => {
   res.send("HELLO");
 });
 
+app.get("/students", async (req, res) => {
+  const snapshot = await db.collection("Students").get();
+
+  const students = [];
+
+  snapshot.forEach((s) => {
+    students.push({...s.data(), id: s.id});
+  })
+  res.send(students);
+})
+
 app.listen(PORT, () => {
-  console.log("Listening");
+  console.log(`Server listening on http://localhost:${PORT}...`);
 });
