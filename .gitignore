@@ -25,3 +25,5 @@ yarn-error.log*
 serviceAccountKey.json
 
 firebaseConfig.js
+
+firebase.js
