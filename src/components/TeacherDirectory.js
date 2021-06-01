@@ -34,7 +34,7 @@ const TeacherDirectory = () => {
             <DirectoryHeader headerName="Teacher Directory">
                 <div>
                     {teachers && teachers.map((teacher) => {
-                        return <div className="container m-4" key={teacher.id}>
+                        return <div className="container mx-4 my-5" key={teacher.id}>
                             <div className="row">
                                 <h2 className="h5">{teacher.firstName} {teacher.lastName}</h2>
                             </div>
@@ -42,8 +42,10 @@ const TeacherDirectory = () => {
                                 <div className="row">Email: {teacher.email ? teacher.email : "N/A"}</div>
                                 <div className="row">Birthday: {teacher.birthday ? teacher.birthday : "N/A"}</div>
                                 <div className="row justify-content-left">
-                                    Classes Teaching:
-                                    <ClassList email={teacher.email} person="teacher" />
+                                    <div className="container row">Classes Teaching:</div>
+                                    <div className="container">
+                                        <ClassList email={teacher.email} person="teacher" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
