@@ -116,7 +116,7 @@ app.get("/login", async (req, res) => {
   }
 });
 
-app.post("/events/add", async (req, reS) => {
+app.post("/events/add", async (req, res) => {
   const {date, description, eventType} = req.body;
 
   let query = db.collection("Events");

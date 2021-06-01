@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import {AuthProvider} from "./../context/AuthProvider"
+import axios from "axios"
 
-export default function ClassPage(id) {
+export default function ClassPage(props) {
+    const id = props.match.params.id
     const [c, setClass] = useState(null)
-    // const [name, setName] = useState("");
-    // const [teacher, setTeacher] = useState("");
-    // const [roster, setRoster] = useState();
-    let name, teacherName, teacherEmail, roster;
+    let display;
+    let name = "This class does not exist!" 
+    let teacherName, teacherEmail, roster;
+
     const fetchClasses = () => {
-        // let a, b, c, d;
         console.log("fetchClasses was called!");
         const url = new URL("http://localhost:8000/classes");
 
@@ -19,11 +20,9 @@ export default function ClassPage(id) {
         .then((obj) => {
             console.log(obj);
             for(let element of obj) {
-                if(element.classID === id.id)
+                if(element.classID === id)
                 {
                     setClass(element);
-                    // let {a, b, c, d} = element.keys;
-                    // console.log("A:", a);
                     break;
                 }
                 else
@@ -46,9 +45,9 @@ export default function ClassPage(id) {
                             <li>Email: {cl.email}</li>
                             <li>
                                 Grade: {cl.grade}
-                                <button style = {{marginLeft: "2%"}}>😀</button>
-                                <button style = {{margin: "0% 1%", marginBottom: "1.5%"}}>😐</button>
-                                <button>🙁</button>
+                                <button onClick = {changeGrade} style = {{marginLeft: "2%"}}>😀</button>
+                                <button onClick = {changeGrade} style = {{margin: "0% 1%", marginBottom: "1.5%"}}>😐</button>
+                                <button onClick = {changeGrade}>🙁</button>
                             </li>
                         </ul>
                     </li>
@@ -61,24 +60,30 @@ export default function ClassPage(id) {
         console.log("clicked")
     }
 
-    if(c === null)
+    const changeGrade = () => {
+        axios
+            .put("http://localhost:8000/classes/grades")
+    }
+
+    if(c === null) {
+        display = <h3 style = {{display: "flex", justifyContent: "center"}}>This class does not exist!</h3>
         fetchClasses();
-    else
-    {
+    }
+    else {
         name = c.className;
         teacherName = c.teacher.name;
         teacherEmail = c.teacher.email
         roster = c.roster;
+        display = 
+            <div>
+                <h1 style = {{display: "flex", justifyContent: "center"}}>{name}</h1>
+                <h3 style = {{display: "flex", justifyContent: "center"}}>{teacherName} ({teacherEmail})</h3>
+                <h4 style = {{marginLeft: "2%"}}>Roster</h4>
+                {rosterDisplay()}
+            </div>
     }
 
     return(
-        <div>
-            {console.log(c)}
-            <h1 style = {{display: "flex", justifyContent: "center"}}>{name}</h1>
-            <h3 style = {{display: "flex", justifyContent: "center"}}>{teacherName} ({teacherEmail})</h3>
-            <h4 style = {{marginLeft: "2%"}}>Roster</h4>
-            {rosterDisplay()}
-
-        </div>
+        display
     )
 }
