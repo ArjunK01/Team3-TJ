@@ -8,7 +8,6 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Navigation />
-        <Calendar/>
       </AuthProvider>
     </div>
   );
