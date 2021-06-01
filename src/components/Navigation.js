@@ -10,6 +10,7 @@ import Auth from "./Auth";
 import Dashboard from "./Dashboard";
 import firebase from "../firebase";
 import { AuthContext } from "../context/AuthProvider";
+import ClassPage from "./ClassPage"
 
 const Navigation = () => {
   let { user } = useContext(AuthContext);
@@ -98,7 +99,7 @@ const Navigation = () => {
               //Change to component
             }
           </Route>
-          <Route path="/class/:id">
+          <Route path="/class/:id"  component = {ClassPage}>
             {
               //Change to component, class page
             }
