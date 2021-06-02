@@ -1,0 +1,9 @@
+.outer-wrap-card{
+    background: var(--light-navy);
+}
+
+.inner-wrap-card{
+    background: var(--light-gold);
+    border-width: 0.2rem;
+    border-color: var(--gold);
+}

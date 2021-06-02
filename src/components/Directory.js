@@ -2,6 +2,7 @@ import React from 'react';
 import NavigateButton from './NavigateButton';
 import ClassList from './ClassList';
 import HeaderWrap from './HeaderWrap';
+import '../styles/directory.css';
 
 const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
     return (
@@ -11,9 +12,9 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                     {peopleList && peopleList.map((person) => {
                         return <div className="container mx-4 my-5" key={person.id}>
                             <div className="row">
-                                <h2 className="h5">{person.firstName} {person.lastName}</h2>
+                                <h2 className="h5 name">{person.firstName} {person.lastName}</h2>
                             </div>
-                            <div className="container">
+                            <div className="container info">
                                 {fields && fields.map((field) => {
                                     return <div className="row">{field.name}: {person[field.val] ? person[field.val] : "N/A"}</div>
                                 })}
@@ -32,6 +33,7 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                                     <NavigateButton
                                         buttonName="Visit Student Profile"
                                         url={`/student/${person.id}`}
+                                        color="dark"
                                     />
                                 </div>
                             }
