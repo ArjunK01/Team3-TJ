@@ -40,8 +40,8 @@ export default function Calendar() {
   
   return (
       <div style={{textAlign:"center"}} className="App">
-        <button onClick={getEvents}>
-          Click Here To Get Events
+        <button type="button" class="btn btn-primary" onClick={getEvents}>
+          Click Here To Get Updated Events
         </button>
         <FullCalendar
           defaultView="dayGridMonth"

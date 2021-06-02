@@ -13,6 +13,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 import StudentDirectory from "./StudentDirectory";
 import TeacherDirectory from "./TeacherDirectory";
+import Calendar from "./Calendar"
 
 import { ClassesContext } from "../context/ClassesProvider";
 
@@ -121,11 +122,12 @@ const Navigation = () => {
             exact
             component={StudentDirectory}
           ></Route>
-          <Route path="/calendar">
-            {
-              //Change to component
-            }
-          </Route>
+          <Route
+            path="/calendar"
+            exact
+            component={Calendar}
+          ></Route>
+          
           <Route path="/class/:id">
             {
               //Change to component, class page
