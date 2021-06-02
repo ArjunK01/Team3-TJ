@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
     firebase.auth().onAuthStateChanged(firebaseUser => {
+      setLoading(true);
       if (firebaseUser) {
         console.log("HERE", firebaseUser.uid);
         setTimeout(
