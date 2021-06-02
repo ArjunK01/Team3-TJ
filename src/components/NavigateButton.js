@@ -6,7 +6,7 @@ const NavigateButton = ({buttonName, url, extraOnClick, color}) => {
 
     return (
         <div>
-            <button className={`btn btn-${color?color:"primary"} m-4`} onClick={() => {
+            <button className={`btn btn-${color?color:"primary"}`} onClick={() => {
                 history.push(url);
                 if(extraOnClick){
                     extraOnClick();

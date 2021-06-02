@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import DirectoryHeader from './DirectoryHeader';
+import Directory from './Directory';
 import ClassList from './ClassList';
 
 import { ClassesContext } from '../context/ClassesProvider';
@@ -7,6 +7,10 @@ import { ClassesContext } from '../context/ClassesProvider';
 const TeacherDirectory = () => {
     const [teachers, setTeachers] = useState([]);
     const { classes } = useContext(ClassesContext);
+    const fields = [
+        { "name": "Email", "val": "email" },
+        { "name": "Birthday", "val": "birthday" }
+    ];
 
     useEffect(() => {
         try {
@@ -31,25 +35,12 @@ const TeacherDirectory = () => {
 
     return (
         <div>
-            <DirectoryHeader headerName="Teacher Directory">
-                <div>
-                    {teachers && teachers.map((teacher) => {
-                        return <div className="container m-4" key={teacher.id}>
-                            <div className="row">
-                                <h2 className="h5">{teacher.firstName} {teacher.lastName}</h2>
-                            </div>
-                            <div className="container">
-                                <div className="row">Email: {teacher.email ? teacher.email : "N/A"}</div>
-                                <div className="row">Birthday: {teacher.birthday ? teacher.birthday : "N/A"}</div>
-                                <div className="row justify-content-left">
-                                    Classes Teaching:
-                                    <ClassList email={teacher.email} person="teacher" />
-                                </div>
-                            </div>
-                        </div>
-                    })}
-                </div>
-            </DirectoryHeader>
+            <Directory
+                headerName="Teacher"
+                classListHeader="Classes Teaching"
+                peopleList={teachers}
+                fields={fields}
+            />
         </div>
     )
 }
