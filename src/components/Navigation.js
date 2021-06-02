@@ -84,7 +84,7 @@ const Navigation = () => {
                   <Link className="nav-link" to="/calendar">
                     Calendar
                   </Link>
-                </li>{" "}
+                </li>
                 <li className="nav-item">
                   <Link
                     className="nav-link"
@@ -93,7 +93,7 @@ const Navigation = () => {
                   >
                     Sign Out
                   </Link>
-                </li>{" "}
+                </li>
               </ul>
             ) : (
               <ul className="navbar-nav">
@@ -128,8 +128,8 @@ const Navigation = () => {
             exact
             component={Calendar}
           ></Route>
-          
-          <Route path="/class/:id" component = {ClassPage}>
+
+          <Route path="/class/:id" component={ClassPage}>
             {
               //Change to component, class page
             }
@@ -146,9 +146,6 @@ const Navigation = () => {
             <Dashboard />
           </Route>
           <Route path="/login">
-            {
-              //Change to component
-            }
             {user ? <Redirect to="/dashboard" /> : <Auth />}
           </Route>
           <Route path="/">

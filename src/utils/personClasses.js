@@ -1,19 +1,21 @@
 export default function personClasses(email, classes, person) {
     const classList = []
-    if(!classes){
+    if (!classes) {
         return classList;
     }
     for (var i = 0; i < classes.length; i++) {
         if (person === "student") {
-            const roster = classes[i].roster;
-            for (var s = 0; s < roster.length; s++) {
-                if (roster[s].email === email) {
-                    classList.push(classes[i]);
+            if (classes[i].roster) {
+                const roster = classes[i].roster;
+                for (var s = 0; s < roster.length; s++) {
+                    if (roster[s].email === email) {
+                        classList.push(classes[i]);
+                    }
                 }
             }
         }
-        else{
-            if(classes[i].teacher.email === email){
+        else {
+            if (classes[i].teacher.email === email) {
                 classList.push(classes[i]);
             }
         }
