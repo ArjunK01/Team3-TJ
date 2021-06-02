@@ -47,9 +47,9 @@ const Navigation = () => {
     <div>
       <Router>
         {/* NAVBAR */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link className="navbar-brand" to="/">
-            TJ Elementary School
+            TJ ELEMENTARY
           </Link>
           <button
             className="navbar-toggler"
