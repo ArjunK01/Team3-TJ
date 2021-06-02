@@ -111,6 +111,10 @@
   cursor: pointer;
 }
 
+.addClassBtn:hover{
+  background: var(--gold);
+}
+
 .addClassBtn svg {
   height: 18px;
   width: 18px;
@@ -230,7 +234,7 @@
 }
 
 .dashSubmitBtn {
-  background-color: black;
+  background-color: var(--navy);
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -242,4 +246,8 @@
   letter-spacing: 0.8px;
   font-size: 16px;
   margin-top: 12px;
+}
+
+.dashSubmitBtn:hover{
+  background: var(--gold);
 }
