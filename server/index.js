@@ -47,6 +47,38 @@ app.get("/classes", async (req, res) => {
   res.send(classes);
 })
 
+app.get("/classes/roster", async (req, res) => {
+  const id = req.query.id;
+  const snapshot = await db.collection("Classes").doc(id).collection("Roster").get();
+
+  const students = [];
+
+  snapshot.forEach((s) => {
+    students.push({...s.data(), id: s.id});
+  })
+  res.send(students);
+})
+
+app.put("/classes/grades", async (req, res) => {
+  let {id, grade, email} = req.body;
+  let ref = db.collection("Classes").doc(id).collection("Roster").doc(email);
+  ref
+  .update({
+    grade: grade
+  })
+  res.sendStatus(200);
+})
+
+app.delete("/classes/removeStudent", async (req, res) => {
+  console.log(req.body);
+  let {id, email} = req.body;
+
+  db.collection("Classes").doc(id).collection("Roster").doc(email).delete();
+
+  res.sendStatus(200);
+})
+
+
 app.get("/events", async (req, res) => {
   const snapshot = await db.collection("Events").get();
   
@@ -56,17 +88,6 @@ app.get("/events", async (req, res) => {
     events.push({...e.data(), id: e.id})
   })
   res.send(events)
-})
-
-app.get("/classes", async (req, res) => {
-  const snapshot = await db.collection("Classes").get();
-
-  const classes = [];
-
-  snapshot.forEach((c) => {
-    classes.push({...c.data(), id: c.id});
-  })
-  res.send(classes);
 })
 
 app.post("/students/add", async (req, res) => {
