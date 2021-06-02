@@ -4,8 +4,12 @@ const ClassesContext = createContext();
 
 const ClassesProvider = ({ children }) => {
   const [classes, setClasses] = useState(null);
+  const [rerender, setRerender] = useState(false);
+  
   return (
-    <ClassesContext.Provider value={{ classes, setClasses }}>
+    <ClassesContext.Provider
+      value={{ classes, setClasses, rerender, setRerender }}
+    >
       {children}
     </ClassesContext.Provider>
   );

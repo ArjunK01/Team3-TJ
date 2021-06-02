@@ -41,47 +41,81 @@ app.get("/classes", async (req, res) => {
 
   const classes = [];
 
-  snapshot.forEach((c) => {
-    classes.push({...c.data(), id: c.id});
-  })
+  snapshot.forEach(c => {
+    classes.push({ ...c.data(), id: c.id });
+  });
   res.send(classes);
-})
+});
+
+app.delete("/classes", async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    await db
+      .collection("Classes")
+      .doc(id)
+      .delete();
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(401);
+  }
+});
 
 app.get("/classes/roster", async (req, res) => {
   const id = req.query.id;
-  const snapshot = await db.collection("Classes").doc(id).collection("Roster").get();
+  const snapshot = await db
+    .collection("Classes")
+    .doc(id)
+    .collection("Roster")
+    .get();
 
   const students = [];
 
-  snapshot.forEach((s) => {
-    students.push({...s.data(), id: s.id});
-  })
+  snapshot.forEach(s => {
+    students.push({ ...s.data(), id: s.id });
+  });
   res.send(students);
-})
+});
 
 app.put("/classes/grades", async (req, res) => {
-  let {id, grade, email} = req.body;
-  let ref = db.collection("Classes").doc(id).collection("Roster").doc(email);
-  ref
-  .update({
+  let { id, grade, email } = req.body;
+  let ref = db
+    .collection("Classes")
+    .doc(id)
+    .collection("Roster")
+    .doc(email);
+  ref.update({
     grade: grade
-  })
+  });
   res.sendStatus(200);
-})
+});
 
 app.delete("/classes/removeStudent", async (req, res) => {
-  let {id, email} = req.body;
+  let { id, email } = req.body;
 
-  db.collection("Classes").doc(id).collection("Roster").doc(email).delete();
+  db.collection("Classes")
+    .doc(id)
+    .collection("Roster")
+    .doc(email)
+    .delete();
 
   res.sendStatus(200);
-})
+});
+
+app.post("/classes/add", async (req, res) => {
+  let { classId, className, teacherName, teacherEmail } = req.body;
+  await db.collection("Classes").add({
+    classID: classId,
+    className,
+    teacher: { name: teacherName, email: teacherEmail }
+  });
+  res.sendStatus(200);
+});
 
 app.post("/classes/addStudent", async (req, res) => {
-
-  let {id, email, name, grade} = req.body;
-  if(!grade)
-    grade = "😀";
+  let { id, email, name, grade } = req.body;
+  if (!grade) grade = "😀";
   let query = db.collection("Students").where("email", "==", email);
   const snapshot = await query.get();
   if (snapshot.empty) {
@@ -89,26 +123,30 @@ app.post("/classes/addStudent", async (req, res) => {
     res.sendStatus(400);
   }
 
-  await db.collection("Classes").doc(id).collection("Roster").doc(email).set({
-    name,
-    grade
-  });
+  await db
+    .collection("Classes")
+    .doc(id)
+    .collection("Roster")
+    .doc(email)
+    .set({
+      name,
+      grade
+    });
 
   console.log("Added", name);
   res.sendStatus(200);
-})
-
+});
 
 app.get("/events", async (req, res) => {
   const snapshot = await db.collection("Events").get();
-  
+
   const events = [];
 
-  snapshot.forEach((e) => {
-    events.push({...e.data(), id: e.id})
-  })
-  res.send(events)
-})
+  snapshot.forEach(e => {
+    events.push({ ...e.data(), id: e.id });
+  });
+  res.send(events);
+});
 
 app.post("/students/add", async (req, res) => {
   const { birthday, email, fName, gender, gradYear, lName } = req.body;
@@ -119,8 +157,8 @@ app.post("/students/add", async (req, res) => {
     const resp = await db.collection("Students").add({
       birthday,
       email,
-      fName,
-      gender,
+      firstName: fName,
+      lastName: gender,
       gradYear,
       lName
     });
@@ -169,26 +207,22 @@ app.get("/login", async (req, res) => {
 });
 
 app.post("/events/add", async (req, res) => {
-  const {date, description, eventType} = req.body;
+  const { date, description } = req.body;
 
   let query = db.collection("Events");
   const snapshot = await query.get();
   if (snapshot.empty) {
     const resp = await db.collection("Events").add({
       date,
-      description, 
-      eventType
+      description
     });
-    console.log("Added " + eventType + "with description: " + description + " on " + date);
+    console.log("Added " + description + " on " + date);
     res.sendStatus(200);
-  }
-  else {
+  } else {
     res.sendStatus(400);
-    console.log("This " + eventType + " is already in the database!")
+    console.log("This " + eventType + " is already in the database!");
   }
-})
-
-
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}...`);
