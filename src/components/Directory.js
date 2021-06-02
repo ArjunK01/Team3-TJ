@@ -11,7 +11,7 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
             <HeaderWrap headerName={`${headerName} Directory`}>
                 <div className="row m-2">
                     {peopleList ? peopleList.map((person) => {
-                        return <div className="mx-auto">
+                        return <div className="mx-auto w-100">
                             <div className="card m-2 p-4">
                                 <div className="container" key={person.id}>
                                     <div className="row">
