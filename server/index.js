@@ -70,7 +70,6 @@ app.put("/classes/grades", async (req, res) => {
 })
 
 app.delete("/classes/removeStudent", async (req, res) => {
-  console.log(req.body);
   let {id, email} = req.body;
 
   db.collection("Classes").doc(id).collection("Roster").doc(email).delete();
@@ -78,12 +77,9 @@ app.delete("/classes/removeStudent", async (req, res) => {
   res.sendStatus(200);
 })
 
-<<<<<<< Updated upstream
-=======
 app.post("/classes/addStudent", async (req, res) => {
 
   let {id, email, name, grade} = req.body;
-  console.log(req.body)
   if(!grade)
     grade = "😀";
   let query = db.collection("Students").where("email", "==", email);
@@ -102,7 +98,6 @@ app.post("/classes/addStudent", async (req, res) => {
   res.sendStatus(200);
 })
 
->>>>>>> Stashed changes
 
 app.get("/events", async (req, res) => {
   const snapshot = await db.collection("Events").get();
