@@ -7,6 +7,7 @@ export default function ClassPage(props) {
     const id = props.match.params.id
     const [c, setClass] = useState(null)
     const [roster, setRoster] = useState([]);
+    const [add, setAdd] = useState();
     let display;
     let name = "This class does not exist!"
     let teacherName, teacherEmail;
@@ -33,6 +34,7 @@ export default function ClassPage(props) {
                             .then((result) => {
                                 setRoster(result);
                             })
+                        setAdd(<button onClick = {generateForm}>Add a student!</button>)
                         break;
                     }
                     else
@@ -82,8 +84,27 @@ export default function ClassPage(props) {
         fetchClasses();
     }
 
-    if (c === null) {
-        display = <h3 style={{ display: "flex", justifyContent: "center" }}>This class does not exist!</h3>
+    const addStudent = (e) => {
+        e.preventDefault();
+        const sName = document.getElementById("name").value;
+        const sEmail = document.getElementById("email").value;
+        const sGrade = document.getElementById("grade").value;
+        axios
+            .post("http://localhost:8000/classes/addStudent", {id: "SBtSoC3Am52vnHqBRzjf", email: sEmail, name: sName, grade: sGrade})
+        fetchClasses();
+    }
+
+    const generateForm = (e) => {
+        setAdd(<form onSubmit = {addStudent}>
+            <input id = "name" type = "text" placeholder = "Enter student name here"/>
+            <input id = "email" type = "text" placeholder = "Enter student email here"/>
+            <input id = "grade" type = "text" placeholder = "Enter student grade here"/>
+            <input type = "submit"/>
+        </form>)
+    }
+
+    if(c === null) {
+        display = <h3 style = {{display: "flex", justifyContent: "center"}}>This class does not exist!</h3>
         fetchClasses();
     }
     else {
@@ -96,6 +117,9 @@ export default function ClassPage(props) {
                 <h3 style={{ display: "flex", justifyContent: "center" }}>{teacherName} ({teacherEmail})</h3>
                 <h4 style={{ marginLeft: "2%" }}>Roster</h4>
                 {rosterDisplay()}
+                <div style = {{display: "flex", justifyContent: "center"}}>
+                    {add}
+                </div>
             </div>
     }
 

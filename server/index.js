@@ -89,7 +89,7 @@ app.post("/classes/addStudent", async (req, res) => {
     res.sendStatus(400);
   }
 
-  await db.collection("Classes").doc(id).collection("Roster").doc(email).add({
+  await db.collection("Classes").doc(id).collection("Roster").doc(email).set({
     name,
     grade
   });
