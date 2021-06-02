@@ -2,6 +2,7 @@ import React from 'react';
 import NavigateButton from './NavigateButton';
 import ClassList from './ClassList';
 import HeaderWrap from './HeaderWrap';
+import Loading from './Loading';
 import '../styles/directory.css';
 
 const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
@@ -9,7 +10,7 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
         <div>
             <HeaderWrap headerName={`${headerName} Directory`}>
                 <div>
-                    {peopleList && peopleList.map((person) => {
+                    {peopleList ? peopleList.map((person) => {
                         return <div className="container mx-4 my-5" key={person.id}>
                             <div className="row">
                                 <h2 className="h5 name">{person.firstName} {person.lastName}</h2>
@@ -38,7 +39,9 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                                 </div>
                             }
                         </div>
-                    })}
+                    }):
+                    <Loading />
+                }
                 </div>
             </HeaderWrap>
         </div>
