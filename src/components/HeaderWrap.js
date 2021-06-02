@@ -18,7 +18,7 @@ const HeaderWrap = ({ headerName, children }) => {
                 </div>
             </div>
             <div className="row justify-content-center m-4">
-                <NavigateButton buttonName="Back To Home" url="/" />
+                <NavigateButton buttonName="Back To Dashboard" url="/" />
             </div>
         </div>
     )
