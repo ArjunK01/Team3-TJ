@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -8,7 +8,7 @@ import HeaderWrap from './HeaderWrap';
 export default function Calendar() {
   const [events, setEvents] = useState([]);
 
-  const getEvents = async () => {
+  useEffect(() => {
     fetch('http://localhost:8000/events')
       .then(async (res) => {
         const results = await res.json();
@@ -21,8 +21,7 @@ export default function Calendar() {
         })
         setEvents(arr);
       })
-
-  }
+  }, [])
 
 
   function getDate(dayString) {
@@ -42,10 +41,7 @@ export default function Calendar() {
   return (
     <div>
       <HeaderWrap headerName={"Calendar"}>
-        <div style={{ textAlign: "center" }}>
-          <button type="button" class="btn btn-dark" onClick={getEvents}>
-            Click Here To Get Updated Events
-        </button>
+        <div className="container my-4">
           <FullCalendar
             defaultView="dayGridMonth"
             header={{
