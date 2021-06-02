@@ -70,11 +70,31 @@ app.put("/classes/grades", async (req, res) => {
 })
 
 app.delete("/classes/removeStudent", async (req, res) => {
-  console.log(req.body);
   let {id, email} = req.body;
 
   db.collection("Classes").doc(id).collection("Roster").doc(email).delete();
 
+  res.sendStatus(200);
+})
+
+app.post("/classes/addStudent", async (req, res) => {
+
+  let {id, email, name, grade} = req.body;
+  if(!grade)
+    grade = "😀";
+  let query = db.collection("Students").where("email", "==", email);
+  const snapshot = await query.get();
+  if (snapshot.empty) {
+    console.log("This student is not enrolled in this school!");
+    res.sendStatus(400);
+  }
+
+  await db.collection("Classes").doc(id).collection("Roster").doc(email).add({
+    name,
+    grade
+  });
+
+  console.log("Added", name);
   res.sendStatus(200);
 })
 
