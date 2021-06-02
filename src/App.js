@@ -1,7 +1,7 @@
 import ContextWrapper from './components/ContextWrapper';
 import Navigation from "./components/Navigation.js";
 import Calendar from "./components/Calendar"
-import "./styles/App.css";
+import "./styles/base.css";
 
 function App() {
   return (

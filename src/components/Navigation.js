@@ -12,12 +12,13 @@ import firebase from "../firebase";
 import { AuthContext } from "../context/AuthProvider";
 import ClassPage from "./ClassPage"
 
-import Home from "./Home";
 import StudentDirectory from "./StudentDirectory";
 import TeacherDirectory from "./TeacherDirectory";
 import Calendar from "./Calendar"
 
 import { ClassesContext } from "../context/ClassesProvider";
+
+import '../styles/navigation.css'
 
 const Navigation = () => {
   let { user } = useContext(AuthContext);
