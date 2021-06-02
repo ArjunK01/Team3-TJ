@@ -1,10 +1,12 @@
 import React, { useEffect, useContext } from "react";
-import "../styles/dashboard.css";
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { ClassesContext } from "../context/ClassesProvider";
+import "../styles/dashboard.css";
 
 const ClassCard = ({ c, user }) => {
   const { rerender, setRerender } = useContext(ClassesContext);
+  const history = useHistory();
 
   const deleteClass = () => {
     axios({
@@ -18,7 +20,7 @@ const ClassCard = ({ c, user }) => {
   };
 
   return (
-    <div className="classCard">
+    <div className="classCard" onClick={() => history.push(`/class/${c.classID}`)}>
       <div className="classId">{c.classId}</div>
       <div className="className">{c.className}</div>
       <div className="classTeacher">Teacher: {c.teacher}</div>

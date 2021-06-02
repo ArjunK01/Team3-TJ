@@ -139,11 +139,7 @@ const Navigation = () => {
               //Change to component, student page
             }
           </Route>
-          <Route path="/dashboard">
-            {
-              //Change to component
-            }
-            <Dashboard />
+          <Route path="/dashboard" exact component={Dashboard}>
           </Route>
           <Route path="/login">
             {user ? <Redirect to="/dashboard" /> : <Auth />}
