@@ -128,7 +128,7 @@ const Navigation = () => {
             component={Calendar}
           ></Route>
           
-          <Route path="/class/:id">
+          <Route path="/class/:id" component = {ClassPage}>
             {
               //Change to component, class page
             }
