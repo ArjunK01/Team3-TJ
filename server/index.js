@@ -169,17 +169,16 @@ app.get("/login", async (req, res) => {
 });
 
 app.post("/events/add", async (req, res) => {
-  const {date, description, eventType} = req.body;
+  const {date, description} = req.body;
 
   let query = db.collection("Events");
   const snapshot = await query.get();
   if (snapshot.empty) {
     const resp = await db.collection("Events").add({
       date,
-      description, 
-      eventType
+      description
     });
-    console.log("Added " + eventType + "with description: " + description + " on " + date);
+    console.log("Added " + description + " on " + date);
     res.sendStatus(200);
   }
   else {
