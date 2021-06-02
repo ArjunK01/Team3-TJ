@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import NavigateButton from './NavigateButton';
 import Directory from './Directory';
-import ClassList from './ClassList';
 
 import { ClassesContext } from '../context/ClassesProvider';
 

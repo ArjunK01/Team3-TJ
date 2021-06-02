@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import HeaderWrap from './HeaderWrap';
 
 
 export default function Calendar() {
   const [events, setEvents] = useState([]);
 
-  const getEvents = async() => {
-      fetch('http://localhost:8000/events')
-      .then(async(res) => {
+  const getEvents = async () => {
+    fetch('http://localhost:8000/events')
+      .then(async (res) => {
         const results = await res.json();
         let arr = [];
         results.forEach((result) => {
@@ -20,39 +21,43 @@ export default function Calendar() {
         })
         setEvents(arr);
       })
-    
- }
 
-
- function getDate(dayString) {
-  const today = new Date();
-  const year = today.getFullYear().toString();
-  let month = (today.getMonth() + 1).toString();
-
-  if (month.length === 1) {
-    month = "0" + month;
   }
 
-  return dayString.replace("YEAR", year).replace("MONTH", month);
-}
+
+  function getDate(dayString) {
+    const today = new Date();
+    const year = today.getFullYear().toString();
+    let month = (today.getMonth() + 1).toString();
+
+    if (month.length === 1) {
+      month = "0" + month;
+    }
+
+    return dayString.replace("YEAR", year).replace("MONTH", month);
+  }
 
 
-  
+
   return (
-      <div style={{textAlign:"center"}} className="App">
-        <button type="button" class="btn btn-primary" onClick={getEvents}>
-          Click Here To Get Updated Events
+    <div>
+      <HeaderWrap headerName={"Calendar"}>
+        <div style={{ textAlign: "center" }}>
+          <button type="button" class="btn btn-dark" onClick={getEvents}>
+            Click Here To Get Updated Events
         </button>
-        <FullCalendar
-          defaultView="dayGridMonth"
-          header={{
-            left: "prev,next",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay"
-          }}
-          plugins={[dayGridPlugin, timeGridPlugin]}
-          events={events}
-        />
-      </div>
-    );
+          <FullCalendar
+            defaultView="dayGridMonth"
+            header={{
+              left: "prev,next",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay"
+            }}
+            plugins={[dayGridPlugin, timeGridPlugin]}
+            events={events}
+          />
+        </div>
+      </HeaderWrap>
+    </div>
+  );
 }

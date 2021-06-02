@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Directory from './Directory';
-import ClassList from './ClassList';
 
 import { ClassesContext } from '../context/ClassesProvider';
 
