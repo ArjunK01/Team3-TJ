@@ -7,3 +7,8 @@
     border-width: 0.2rem;
     border-color: var(--gold);
 }
+
+.header{
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}

@@ -49,10 +49,6 @@
   opacity: 0.9;
 }
 
-.name {
-  font-size: 28px;
-}
-
 .email {
   font-size: 20px;
   display: flex;
@@ -77,7 +73,7 @@
 }
 
 .status > * {
-  background-color: #212529;
+  background-color: var(--navy);
   display: flex;
   align-items: center;
   border-radius: 3px;
@@ -102,7 +98,7 @@
 }
 
 .addClassBtn {
-  background-color: #212529;
+  background-color: var(--navy);
   color: white;
   padding: 3px 8px;
   border-radius: 3px;
@@ -144,7 +140,7 @@
 }
 
 .classId {
-  color: #0891b1;
+  color: var(--gold);
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
@@ -176,7 +172,7 @@
 }
 
 .sidebarHeader {
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.8px;
@@ -184,14 +180,14 @@
 }
 
 .sidebarInfo {
-  font-size: 24px;
+  font-size: 1.3rem;
 }
 
 .sidebarInfo span {
-  font-size: 18px;
+  font-size: 1.1rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.7px;
   margin-left: 5px;
 }
 

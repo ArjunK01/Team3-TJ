@@ -9,13 +9,13 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
     return (
         <div>
             <HeaderWrap headerName={`${headerName} Directory`}>
-                <div className="row">
+                <div className="row m-2">
                     {peopleList ? peopleList.map((person) => {
                         return <div className="mx-auto">
-                            <div className="card m-4 p-4">
+                            <div className="card m-2 p-4">
                                 <div className="container" key={person.id}>
                                     <div className="row">
-                                        <h2 className="h5 name">{person.firstName} {person.lastName}</h2>
+                                        <h2 className="h4 name">{person.firstName} {person.lastName}</h2>
                                     </div>
                                     <div className="container info">
                                         {fields && fields.map((field) => {
