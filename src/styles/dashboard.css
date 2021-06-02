@@ -73,7 +73,7 @@
 }
 
 .status > * {
-  background-color: var(--navy);
+  background-color: var(--gold);
   display: flex;
   align-items: center;
   border-radius: 3px;
