@@ -3,6 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import "../styles/loading.css";
 
 const Loading = () => {
+
     return (
         <div>
             <div className="row m-4 load">

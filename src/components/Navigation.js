@@ -47,9 +47,9 @@ const Navigation = () => {
     <div>
       <Router>
         {/* NAVBAR */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link className="navbar-brand" to="/">
-            TJ Elementary School
+            TJ ELEMENTARY
           </Link>
           <button
             className="navbar-toggler"
@@ -139,11 +139,7 @@ const Navigation = () => {
               //Change to component, student page
             }
           </Route>
-          <Route path="/dashboard">
-            {
-              //Change to component
-            }
-            <Dashboard />
+          <Route path="/dashboard" exact component={Dashboard}>
           </Route>
           <Route path="/login">
             {user ? <Redirect to="/dashboard" /> : <Auth />}

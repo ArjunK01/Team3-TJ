@@ -61,7 +61,7 @@ export default function Calendar() {
   return (
     <div>
       <HeaderWrap headerName={"Calendar"}>
-        <div className="container my-4">
+        <div className="card m-2 p-4">
           <FullCalendar
             defaultView="dayGridMonth"
             header={{

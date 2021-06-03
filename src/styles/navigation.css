@@ -2,16 +2,11 @@
     background-color: var(--light-navy) !important;
 }
 
-.navbar-light a {
+.navbar-dark a {
     color: var(--white) !important;
+    letter-spacing: 0.7px;
 }
 
 .nav-item:hover {
     opacity: 0.7;
-}
-
-.navbar-toggler{
-    background: var(--light-gold);
-    border-width: 0.2rem;
-    border-color: var(--gold);
 }
