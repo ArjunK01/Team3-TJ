@@ -59,7 +59,7 @@ export default function ClassPage(props) {
                 <div className="container-fluid border-bottom">
                     <div className="container-fluid p-3">
                         <div className="row" key={cl.id}>
-                            <div className="h5 name">{cl.name}</div>
+                            <div className="font-weight-bold name">{cl.name}</div>
                         </div>
                         <div className="row w-100 m-2">
                             Email: {cl.id}
@@ -81,7 +81,7 @@ export default function ClassPage(props) {
                         </div>
                         <div className="row w-100 mx-2 mt-3 mb-1">
                             <button name={cl.id} onClick={removeStudent} className="btn btn-dark">
-                            <i class="fas fa-minus mr-2"></i>Remove Student
+                                <i class="fas fa-minus mr-2"></i>Remove Student
                             </button>
                         </div>
                     </div>
@@ -138,20 +138,22 @@ export default function ClassPage(props) {
         display =
             <HeaderWrap headerName={name}>
                 <div className="card p-4 m-4">
-                    <div className="row w-100 ml-2 mb-2">
-                        <h2 className="h4 name">Taught By: {teacherName}</h2>
-                    </div>
-                    <div className="row w-100 ml-2 mb-2">
-                        <div className="h5">
-                            <i className="fas fa-envelope me-3 mr-2"></i>{teacherEmail}
+                    <div className="m-4">
+                        <div className="row w-100 ml-2">
+                            <h2 className="h5 name">Taught By: {teacherName}</h2>
                         </div>
-                    </div>
-                    <div className="row w-100 ml-2 mt-4 border-bottom">
-                        <h2 className="h4 name">Roster</h2>
-                    </div>
-                    {rosterDisplay()}
-                    <div className="d-flex justify-content-end mt-4">
-                        {add}
+                        <div className="row w-100 ml-2 mb-2">
+                            <div>
+                                <i className="fas fa-envelope me-3 mr-2"></i>{teacherEmail}
+                            </div>
+                        </div>
+                        <div className="row w-100 ml-2 mt-4 border-bottom">
+                            <h2 className="h5 name">Roster</h2>
+                        </div>
+                        {rosterDisplay()}
+                        <div className="d-flex justify-content-end mt-4">
+                            {add}
+                        </div>
                     </div>
                 </div>
             </HeaderWrap>
