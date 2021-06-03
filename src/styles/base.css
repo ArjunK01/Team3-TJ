@@ -63,6 +63,15 @@ body {
   font-weight: bold;
   border-width: 0.2rem;
   border-color: var(--gold);
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
 }
 
 

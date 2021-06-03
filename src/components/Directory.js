@@ -19,7 +19,7 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                                     </div>
                                     <div className="info w-100 ml-4">
                                         {fields && fields.map((field) => {
-                                            return <div className="row">{field.name}: {person[field.val] ? person[field.val] : "N/A"}</div>
+                                            return <div className="row" key={field.name}>{field.name}: {person[field.val] ? person[field.val] : "N/A"}</div>
                                         })}
                                         <div className="row w-100 ml-4">
                                             <div className="container row">{classListHeader}:</div>
