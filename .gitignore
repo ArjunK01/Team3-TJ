@@ -26,3 +26,4 @@ serviceAccountKey.json
 
 firebaseConfig.js
 firebase.js
+.vercel
