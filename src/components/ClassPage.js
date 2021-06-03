@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { AuthProvider } from "./../context/AuthProvider"
+
 import axios from "axios"
 import HeaderWrap from './HeaderWrap';
+
 import '../styles/directory.css';
 import '../styles/base.css';
+import '../styles/classPage.css'
 
 
 export default function ClassPage(props) {
@@ -64,14 +67,14 @@ export default function ClassPage(props) {
                         <div className="row w-100 m-2">
                             Email: {cl.id}
                         </div>
-                        <div className="container-fluid w-100 m-2">
-                            <div className="row">
+                        <div className="container-fluid w-100 mb-4 mt-2 mx-2">
+                            <div className="row mb-2">
                                 Grade: {cl.grade}
                             </div>
                             <div className="row">
-                                <div className="card">
-                                    <div className="card-title">Change grade</div>
-                                    <div className="btn-group">
+                                <div className="card px-3 py-1">
+                                    <div className="card-title mb-2">Change grade</div>
+                                    <div className="btn-group justify-content-between">
                                         <button className="grade-btn" name={cl.id} value={"😀"} onClick={changeGrade}>😀</button>
                                         <button className="grade-btn" name={cl.id} value={"😐"} onClick={changeGrade}>😐</button>
                                         <button className="grade-btn" name={cl.id} value={"🙁"} onClick={changeGrade}>🙁</button>
