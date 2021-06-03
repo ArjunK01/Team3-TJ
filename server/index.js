@@ -160,7 +160,8 @@ app.post("/students/add", async (req, res) => {
       firstName: fName,
       lastName: gender,
       gradYear,
-      lName
+      lastName: lName,
+      gender
     });
 
     console.log("Added", fName + lName + " with ID: ", resp.id);
