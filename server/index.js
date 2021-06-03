@@ -221,19 +221,15 @@ app.post("/events/add", async (req, res) => {
   });
 
   app.delete("events/delete", async (req, res) => {
-    const { date, description } = req.body;
+    const { id } = req.body;
     try {
-      await db
-      .collection("Events")
-      .doc(date)
-      .doc(description)
-      .delete();
+      await db.collection("Events").doc(id).delete();
       res.sendStatus(200);
     } catch (error) {
       console.log(error);
-      res.sendStatus(401);
+    res.sendStatus(401);
     }
-  })
+  });
 
 
 app.listen(PORT, () => {
