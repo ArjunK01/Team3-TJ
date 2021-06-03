@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
                 setUser(res && res.data);
                 setLoading(false);
               }),
-          100
+          1000
         );
       } else {
         setUser(null);

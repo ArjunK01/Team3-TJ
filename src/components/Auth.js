@@ -10,7 +10,7 @@ const Auth = () => {
       <div className="authFormContainer">
         <AuthForm login={login} />
         <div
-          className="loginSwitchBtn text-secondary"
+          className="loginSwitchBtn "
           onClick={() => setLogin(log => !log)}
         >
           {login

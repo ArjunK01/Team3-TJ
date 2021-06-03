@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import ClassCard from "./ClassCard";
 import Sidebar from "./Sidebar";
 import DashboardForm from "./DashboardForm";
-import HeaderWrap from './HeaderWrap';
+import HeaderWrap from "./HeaderWrap";
 
 import axios from "axios";
 
@@ -22,21 +22,22 @@ const Dashboard = () => {
 
   const [cl, setCl] = useState([]);
 
-  const getClasses = () => {
+  const getClasses = async () => {
     axios.get("http://localhost:8000/classes").then(res => {
       let temp = [];
-      res.data.forEach(c => {
+      res.data.forEach(async c => {
         temp.push({
           classId: c.classID,
           className: c.className,
           teacher: c.teacher.name,
-          size: c.roster ? c.roster.length : 0,
           id: c.id
         });
       });
       setCl(temp);
     });
   };
+
+  const getRosterSize = id => { };
 
   const getTeachers = () => {
     try {
@@ -48,8 +49,6 @@ const Dashboard = () => {
           if (obj.length === 0) {
             setTeachers([]);
           } else {
-            console.log("classes", classes);
-            console.log("teachers", obj);
             setTeachers(obj);
           }
         });
@@ -92,42 +91,31 @@ const Dashboard = () => {
     <HeaderWrap headerName="Dashboard" dashboard={true}>
       <div className="card m-2 p-4">
         <div className="tbg">
-          <div>
+          <div className="container-fluid px-4 py-4">
             <div className="dashboardContainer">
               <div className="leftContainer">
                 <div className="userInfoContainer">
                   <div className="userInfo">
                     <div className="h4 font-weight-bold">
-                      Welcome back, {user && user.firstName} {user && user.lastName}
+                      Welcome back, {user && user.firstName}{" "}
+                      {user && user.lastName}!
                     </div>
                     <div className="email text-secondary">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                      {user && user.email}
+                      <i className="fas fa-envelope me-3 mr-1"></i> {user && user.email}
                     </div>
                     <div className="status">
-                      {user.isTeacher && <div className="isTeacher">Teacher</div>}
+                      {user.isTeacher && (
+                        <div className="isTeacher">Teacher</div>
+                      )}
                       {user.isAdmin && <div className="isAdmin">Admin</div>}
                     </div>
                   </div>
                 </div>
-                <div className="classListContainer">
+                <div className="container-fluid m-0 p-0">
                   <div className="classListHeaderContainer">
                     <div className="classListHeader">
                       Classes at TJ Elementary School
-            </div>
+                    </div>
                     {user.isAdmin && (
                       <div
                         className="addClassBtn"
@@ -136,21 +124,7 @@ const Dashboard = () => {
                           setStudentForm(false);
                         }}
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                          />
-                        </svg>
-                Add Class
+                      <i class="fas fa-plus mr-2"></i> Add Class
                       </div>
                     )}
                   </div>
@@ -172,6 +146,7 @@ const Dashboard = () => {
                   numClasses={cl.length}
                   numTeachers={teachers.length}
                   numStudents={students.length}
+                  isAdmin={user.isAdmin}
                 />
               </div>
             </div>

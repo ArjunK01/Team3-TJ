@@ -12,8 +12,6 @@
 
 .dashboardContainer {
   display: flex;
-  max-width: 1100px;
-  margin: 0px auto;
   justify-content: space-between;
   background-color: white;
 }
@@ -21,13 +19,15 @@
 .leftContainer {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 75%;
+  float: left;
 }
 
 .rightContainer {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 20%;
+  float: right;
 }
 .userInfoContainer {
   display: flex;
@@ -133,7 +133,6 @@
   box-shadow: 0 2px 3px 0 hsla(0, 0%, 0%, 0.1);
   border-radius: 4px;
   padding: 12px;
-  height: 125px;
   margin-bottom: 20px;
   justify-content: space-between;
 }
@@ -195,12 +194,12 @@
   margin-left: 5px;
 }
 
-.schoolSize {
+.schoolSize{
   display: flex;
-  align-items: baseline;
+  justify-content: space-between;
 }
 
-.schoolSize svg {
+.schoolSize {
   height: 24px;
   width: 24px;
   padding: 0;
@@ -211,8 +210,8 @@
   margin-bottom: -2px;
 }
 
-.schoolSize svg:hover {
-  color: black;
+.schoolSize:hover {
+  color: var(--gold) !important;
 }
 
 .dashboardForm {

@@ -9,41 +9,29 @@ const Sidebar = ({
   setStudentForm,
   setClassForm,
   numTeachers,
-  numStudents
+  numStudents,
+  isAdmin
 }) => {
   return (
     <div className="sidebar">
-      <div className="sidebarHeader">School Overview</div>
-      <div className="sidebarInfo schoolSize">
-        {numClasses} <span className="text-secondary">Classes</span>
+      <div className="sidebarHeader row ml-2">School Overview</div>
+      <div className="sidebarInfo row ml-2">
+        {numClasses} <span className="text-secondary ml-2 mt-1">Classes</span>
       </div>
-      <div className="sidebarInfo schoolSize">
-        {numTeachers} <span className="text-secondary">Teachers</span>
+      <div className="sidebarInfo row ml-2">
+        {numTeachers} <span className="text-secondary ml-2 mt-1">Teachers</span>
       </div>
 
-      <div className="sidebarInfo schoolSize">
-        {numStudents} <span className="text-secondary">students</span>{" "}
-        <div
+      <div className="sidebarInfo row ml-2">
+        {numStudents} <span className="text-secondary ml-2 mt-1">students</span>
+        {isAdmin && <div
           onClick={() => {
             setStudentForm(f => !f);
             setClassForm(false);
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-            />
-          </svg>
-        </div>
+          <i class="fas fa-user-plus text-muted schoolSize mr-2"></i>
+        </div>}
       </div>
       {classForm || studentForm ? (
         <DashboardForm

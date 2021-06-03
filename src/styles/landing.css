@@ -1,0 +1,41 @@
+.landingContainer {
+  color: white;
+  display: flex;
+  height: 70vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.landingCenter {
+  display: flex;
+  align-items: center;
+}
+.landingTextContainer {
+}
+
+.landingHeroContainer {
+  margin-left: 100px;
+}
+
+.landingMain {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.landingSecondary {
+  font-size: 32px;
+
+  color: var(--light-blue);
+}
+
+.landingCTA {
+  justify-content: center;
+  width: 150px;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.mascot {
+  height: 225px;
+  width: 225px;
+}

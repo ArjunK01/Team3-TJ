@@ -11,7 +11,7 @@
 .loginSwitchBtn {
   cursor: pointer;
   margin-top: 12px;
-  color: var(--white) !important;
+  color: var(--light-blue) !important;
 }
 
 .authForm {
@@ -55,6 +55,7 @@
   text-transform: uppercase;
   margin-bottom: 16px;
   letter-spacing: 0.8px;
+  color: var(--white);
 }
 
 .nameInput {
@@ -93,7 +94,7 @@
   margin-bottom: 0;
 }
 
-#basic-addon2{
+#basic-addon2 {
   background-color: var(--light-blue) !important;
   color: var(--navy);
 }
