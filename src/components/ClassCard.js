@@ -22,7 +22,7 @@ const ClassCard = ({ c, user }) => {
   return (
     <div className="classCard" onClick={() => history.push(`/class/${c.classId}`)}>
       <div className="classId">{c.classId}</div>
-      <div className="className">{c.className}</div>
+      <div className="className mb-1">{c.className}</div>
       <div className="classTeacher">Teacher: {c.teacher}</div>
       <div className="cardBottom">
         <div className="classSize text-secondary">{c.size} Students</div>

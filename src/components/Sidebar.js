@@ -21,7 +21,7 @@ const Sidebar = ({
         {numTeachers} <span className="text-secondary">Teachers</span>
       </div>
 
-      <div className="sidebarInfo schoolSize">
+      <div className="sidebarInfo schoolSize d-flex">
         {numStudents} <span className="text-secondary">students</span>{" "}
         <div
           onClick={() => {
@@ -31,7 +31,7 @@ const Sidebar = ({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-6 w-6 justify-content-right"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
