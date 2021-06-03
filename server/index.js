@@ -115,14 +115,20 @@ app.post("/classes/add", async (req, res) => {
 
 app.post("/classes/addStudent", async (req, res) => {
   let { id, email, name, grade } = req.body;
-  if (!grade) grade = "😀";
+  if (!grade || grade !== "😐" || grade !== "🙁" || grade !== "😀") 
+    grade = "😀";
   let query = db.collection("Students").where("email", "==", email);
+
+  console.log(id);
+
+
   const snapshot = await query.get();
   if (snapshot.empty) {
     console.log("This student is not enrolled in this school!");
     res.sendStatus(400);
     return;
   }
+
 
   await db
     .collection("Classes")
@@ -144,7 +150,7 @@ app.put("/classes/editTeacher", async (req, res) => {
   const snapshot = await query.get();
   if (snapshot.empty) {
     console.log("This teacher does not work at this school!");
-    res.sendStatus(404);
+    res.status(400).send("Teacher not employed");
     return;
   }
   let staff;

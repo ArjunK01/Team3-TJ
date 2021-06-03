@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AuthProvider} from "./../context/AuthProvider"
 import axios from "axios"
 import HeaderWrap from './HeaderWrap';
-// import {response} from "express"
 
 export default function ClassPage(props) {
     const id = props.match.params.id
@@ -10,10 +9,7 @@ export default function ClassPage(props) {
     const [roster, setRoster] = useState([]);
     const [add, setAdd] = useState();
     const [changeTeacher, setChangeTeacher] = useState();
-    const [tFName, setTFName] = useState("");
-    const [tLName, setTLName] = useState("");
-    const [tEmail, setTEmail] = useState("");
-    const [docID, setDocID] = useState();
+    let docID;
     let display;
     let name = "This class does not exist!" 
     let teacherName, teacherEmail;
@@ -27,12 +23,11 @@ export default function ClassPage(props) {
                 return (resp.json());
             })
             .then((obj) => {
-                // console.log(obj);
                 for (let element of obj) {
                     if (element.classID === id) {
-                        setDocID(element.id);
-                        setTFName(element.teacher.name);
-                        setTEmail(element.teacher.email);
+                        docID = element.id
+                        teacherName = element.teacher.name;
+                        teacherEmail = element.teacher.email;
                         setClass(element);
                         const url2 = new URL("http://localhost:8000/classes/roster");
                         url2.searchParams.append("id", element.id);
@@ -57,7 +52,6 @@ export default function ClassPage(props) {
     const rosterDisplay = () => {
         if(roster.length === 0)
             return;
-        // console.log("\nList names:\n", roster)
         const nameList = <ul>
             {roster.map((cl) => (
                     <li style = {{marginLeft: "5%"}} key = {cl.id}>
@@ -78,56 +72,40 @@ export default function ClassPage(props) {
         return(nameList);
     } //ends rosterDisplay
 
-    const handleChange = (e) => {
-        // console.log(e.target.id);
-        switch (e.target.id) {
-            case "tFName":
-                // console.log(e.target.value)
-                setTFName(e.target.value);
-                break;
-            case "tLName":
-                setTLName(e.target.value);
-                break;
-            case "tEmail":
-                setTEmail(e.target.value);
-                break;
-            default:
-                break;
-        }
-    }
-
     const editTeacher = (e) => {
-        // console.log(tFName);
-        const fName = document.getElementById("tFName").value;
-        const lName = document.getElementById("tLName").value;
-        const tEmail = document.getElementById("tEmail").value;
+        const names = teacherName.split(" ");
+        let fName = document.getElementById("tFName").value;
+        let lName = document.getElementById("tLName").value;
+        let tEmail = document.getElementById("tEmail").value;
 
-        if(tEmail === "") {
-            alert("An email must be entered!");
-            return;
-        }
+        if(fName === "" && names[0])
+            fName = names[0];
+        if(lName === "" && names[name.length - 1])
+            lName = names[name.length - 1]
+        if(tEmail === "")
+            tEmail = teacherEmail;
         axios
             .put("http://localhost:8000/classes/editTeacher", {id: docID, email: tEmail, fName: fName, lName: lName})
-        fetchClasses();
+            .catch(function(error) {
+                e.preventDefault();
+                alert("error");
+                if(error.response) {
+                    console.log(error.response);
+                    alert("This student is not enrolled in the school!");
+                }
+            })
     }
 
     const generateTeacherChange = (e) => {
-        // console.log("should only happen once");
-        const names = tFName.split();
-        // console.log(names);
-        setTFName(names[0]);
-        setTLName(names[names.length - 1]);
-        // console.log(tFName)
         setChangeTeacher(<form onSubmit = {editTeacher}>
-            <input id = "tFName" type = "text" onChange = {handleChange} placeholder = "Enter updated first name here" />
-            <input id = "tLName" type = "text" placeholder = "Enter updated last name here" onChange = {handleChange}/>
-            <input id = "tEmail" type = "text" placeholder = "Enter updated teacher email here" onChange = {handleChange}/>
+            <input id = "tFName" type = "text" placeholder = "Enter updated first name here" />
+            <input id = "tLName" type = "text" placeholder = "Enter updated last name here"/>
+            <input id = "tEmail" type = "text" placeholder = "Enter updated teacher email here"/>
             <input type = "submit"/>
         </form>)
     }
 
     const removeStudent = (e) => {
-        // console.log(e.target.name);
         const email = e.target.name
         axios
             .delete("http://localhost:8000/classes/removeStudent", {data: {id: c.id, email: email}})
@@ -143,7 +121,6 @@ export default function ClassPage(props) {
     }
 
     const addStudent = (e) => {
-        e.preventDefault();
         const sName = document.getElementById("name").value;
         const sEmail = document.getElementById("email").value;
         const sGrade = document.getElementById("grade").value;
@@ -156,7 +133,7 @@ export default function ClassPage(props) {
                     if(error.response)
                         alert("This student is not enrolled in the school!");
                 })
-            fetchClasses();
+            // fetchClasses();
         }
     }
 
@@ -169,9 +146,15 @@ export default function ClassPage(props) {
         </form>)
     }
 
+    useEffect(() => {
+        let mounted = true;
+        if(mounted)
+            fetchClasses();
+        return () => mounted = false;
+    }, [display])
+
     if(c === null) {
         display = <h3 style = {{display: "flex", justifyContent: "center"}}>This class does not exist!</h3>
-        fetchClasses();
     }
     else {
         name = c.className;
