@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { AuthProvider } from "./../context/AuthProvider"
 import axios from "axios"
 import HeaderWrap from './HeaderWrap';
+import '../styles/directory.css';
+import '../styles/base.css';
+
 
 export default function ClassPage(props) {
     const id = props.match.params.id
@@ -34,7 +37,10 @@ export default function ClassPage(props) {
                             .then((result) => {
                                 setRoster(result);
                             })
-                        setAdd(<button onClick={generateForm}>Add a student!</button>)
+                        setAdd(
+                            <button onClick={generateForm} className="btn btn-dark">
+                                <i class="fas fa-plus mr-2"></i>Add student
+                            </button>)
                         break;
                     }
                     else
@@ -48,23 +54,41 @@ export default function ClassPage(props) {
         if (roster.length === 0)
             return;
         console.log("\nList names:\n", roster)
-        const nameList = <ul>
+        const nameList = <div className="info w-100">
             {roster.map((cl) => (
-                <li style={{ marginLeft: "5%" }} key={cl.id}>
-                    {cl.name}
-                    <button name={cl.id} onClick={removeStudent} style={{ margin: "0.5% 3%", marginBottom: "0.3%", padding: "0% 1%" }}>Remove Student</button>
-                    <ul style={{ listStyleType: "square", marginLeft: "2%" }}>
-                        <li>Email: {cl.id}</li>
-                        <li>
-                            Grade: {cl.grade}
-                            <button name={cl.id} value={"😀"} onClick={changeGrade} style={{ marginLeft: "2%" }}>😀</button>
-                            <button name={cl.id} value={"😐"} onClick={changeGrade} style={{ margin: "0% 1%", marginBottom: "1.5%" }}>😐</button>
-                            <button name={cl.id} value={"🙁"} onClick={changeGrade}>🙁</button>
-                        </li>
-                    </ul>
-                </li>
+                <div className="container-fluid border-bottom">
+                    <div className="container-fluid p-3">
+                        <div className="row" key={cl.id}>
+                            <div className="h5 name">{cl.name}</div>
+                        </div>
+                        <div className="row w-100 m-2">
+                            Email: {cl.id}
+                        </div>
+                        <div className="container-fluid w-100 m-2">
+                            <div className="row">
+                                Grade: {cl.grade}
+                            </div>
+                            <div className="row">
+                                <div className="card">
+                                    <div className="card-title">Change grade</div>
+                                    <div className="btn-group">
+                                        <button className="grade-btn" name={cl.id} value={"😀"} onClick={changeGrade}>😀</button>
+                                        <button className="grade-btn" name={cl.id} value={"😐"} onClick={changeGrade}>😐</button>
+                                        <button className="grade-btn" name={cl.id} value={"🙁"} onClick={changeGrade}>🙁</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row w-100 mx-2 mt-3 mb-1">
+                            <button name={cl.id} onClick={removeStudent} className="btn btn-dark">
+                            <i class="fas fa-minus mr-2"></i>Remove Student
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             ))}
-        </ul>
+        </div>
         return (nameList);
     }
 
@@ -104,7 +128,7 @@ export default function ClassPage(props) {
     }
 
     if (c === null) {
-        display = <h3 style={{ display: "flex", justifyContent: "center" }}>This class does not exist!</h3>
+        display = <h3 className="d-flex justify-content-center">This class does not exist!</h3>
         fetchClasses();
     }
     else {
@@ -112,22 +136,28 @@ export default function ClassPage(props) {
         teacherName = c.teacher.name;
         teacherEmail = c.teacher.email
         display =
-            <div>
-                <h1 style={{ display: "flex", justifyContent: "center" }}>{name}</h1>
-                <h3 style={{ display: "flex", justifyContent: "center" }}>{teacherName} ({teacherEmail})</h3>
-                <h4 style={{ marginLeft: "2%" }}>Roster</h4>
-                {rosterDisplay()}
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                    {add}
+            <HeaderWrap headerName={name}>
+                <div className="card p-4 m-4">
+                    <div className="row w-100 ml-2 mb-2">
+                        <h2 className="h4 name">Taught By: {teacherName}</h2>
+                    </div>
+                    <div className="row w-100 ml-2 mb-2">
+                        <div className="h5">
+                            <i className="fas fa-envelope me-3 mr-2"></i>{teacherEmail}
+                        </div>
+                    </div>
+                    <div className="row w-100 ml-2 mt-4 border-bottom">
+                        <h2 className="h4 name">Roster</h2>
+                    </div>
+                    {rosterDisplay()}
+                    <div className="d-flex justify-content-end mt-4">
+                        {add}
+                    </div>
                 </div>
-            </div>
+            </HeaderWrap>
     }
 
     return (
-        <HeaderWrap headerName="Class Page">
-            <div className="card p-4 m-4">
-                {display}
-            </div>
-        </HeaderWrap>
+        display
     )
 }
