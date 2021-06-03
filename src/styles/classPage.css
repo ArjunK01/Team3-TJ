@@ -1,0 +1,9 @@
+.grade-btn{
+    background-color: transparent;
+    border-width: 0;
+}
+
+.grade-btn:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
