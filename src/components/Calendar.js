@@ -4,7 +4,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import HeaderWrap from './HeaderWrap';
 import axios from "axios"
-import { Button } from "@material-ui/core";
 import { AuthContext } from "../context/AuthProvider";
 import { Redirect } from "react-router-dom";
 
@@ -16,6 +15,7 @@ export default function Calendar() {
   const [events, setEvents] = useState([]);
   const [add, setAdd] = useState(false);
   const { user } = useContext(AuthContext);
+  const [remove, setRemove] = useState(false);
 
 
 
@@ -41,6 +41,17 @@ export default function Calendar() {
     const newDescription = document.getElementById("description").value;
     axios
       .post("http://localhost:8000/events/add", { date: newDate, description: newDescription })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  const removeEvent = (e) => {
+
+    axios
+      .delete("http://localhost:8000/events/delete", {data: {}})
       .then((response) => {
         console.log(response);
       }, (error) => {
@@ -81,8 +92,9 @@ export default function Calendar() {
             plugins={[dayGridPlugin, timeGridPlugin]}
             events={events}
           />
-
         </div>
+
+        
         <div className="text-center m-4">
           {user.isAdmin && <h4>To add an event, enter date and description</h4>}
           {user.isAdmin &&
