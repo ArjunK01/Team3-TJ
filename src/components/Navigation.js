@@ -10,15 +10,16 @@ import Auth from "./Auth";
 import Dashboard from "./Dashboard";
 import firebase from "../firebase";
 import { AuthContext } from "../context/AuthProvider";
-import ClassPage from "./ClassPage"
+import ClassPage from "./ClassPage";
 
 import StudentDirectory from "./StudentDirectory";
 import TeacherDirectory from "./TeacherDirectory";
-import Calendar from "./Calendar"
+import Calendar from "./Calendar";
 
 import { ClassesContext } from "../context/ClassesProvider";
 
-import '../styles/navigation.css'
+import "../styles/navigation.css";
+import Landing from "./Landing";
 
 const Navigation = () => {
   let { user } = useContext(AuthContext);
@@ -123,11 +124,7 @@ const Navigation = () => {
             exact
             component={StudentDirectory}
           ></Route>
-          <Route
-            path="/calendar"
-            exact
-            component={Calendar}
-          ></Route>
+          <Route path="/calendar" exact component={Calendar}></Route>
 
           <Route path="/class/:id" component={ClassPage}>
             {
@@ -139,13 +136,12 @@ const Navigation = () => {
               //Change to component, student page
             }
           </Route>
-          <Route path="/dashboard" exact component={Dashboard}>
-          </Route>
+          <Route path="/dashboard" exact component={Dashboard}></Route>
           <Route path="/login">
             {user ? <Redirect to="/dashboard" /> : <Auth />}
           </Route>
           <Route path="/">
-            {user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+            {user ? <Redirect to="/dashboard" /> : <Landing />}
           </Route>
         </Switch>
       </Router>
