@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import HeaderWrap from './HeaderWrap';
 import axios from "axios"
-import {Button, Input} from "@material-ui/core";
+import {Button} from "@material-ui/core";
+import { AuthContext } from "../context/AuthProvider";
+import { Redirect } from "react-router-dom";
+
+
 
 
 
 export default function Calendar() {
   const [events, setEvents] = useState([]);
   const [add, setAdd] = useState(false);
+  const { user } = useContext(AuthContext);
+
 
 
   useEffect(() => {
@@ -55,7 +61,9 @@ export default function Calendar() {
 
     return dayString.replace("YEAR", year).replace("MONTH", month);
   }
-
+  if (!user) {
+    return <Redirect to="/login" />;
+  }
 
 
   return (
@@ -75,9 +83,9 @@ export default function Calendar() {
 
         </div>
         <div style={{textAlign:"center"}}>
-        <h4>To Add An Event Enter Date And Description</h4>
-       <Button variant="contained" color="primary" onClick={()=>setAdd(true)}>Add An Event</Button>
-       {add && <form onSubmit = {addEvent}>
+        {user.isAdmin && <h4>To Add An Event Enter Date And Description</h4>}
+       {user.isAdmin && <Button variant="contained" color="primary" onClick={()=>setAdd(true)}>Add An Event</Button>}
+       {add && user.isAdmin && <form onSubmit = {addEvent}>
         <input id = "date" type = "text" placeholder = "Enter date here"/>
         <input id = "description" type = "text" placeholder = "Enter description here"/>
         <input type = "submit"/>
