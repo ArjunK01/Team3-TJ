@@ -12,3 +12,8 @@
     text-transform: uppercase;
     letter-spacing: 0.8px;
 }
+
+.footer{
+    background: var(--light-navy);
+    color: rgba(255, 255, 255, 0.9);
+}

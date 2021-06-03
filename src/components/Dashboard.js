@@ -91,7 +91,7 @@ const Dashboard = () => {
     <HeaderWrap headerName="Dashboard" dashboard={true}>
       <div className="card m-2 p-4">
         <div className="tbg">
-          <div>
+          <div className="container-fluid px-4 py-4">
             <div className="dashboardContainer">
               <div className="leftContainer">
                 <div className="userInfoContainer">
@@ -125,7 +125,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="classListContainer">
+                <div className="container-fluid m-0 p-0">
                   <div className="classListHeaderContainer">
                     <div className="classListHeader">
                       Classes at TJ Elementary School
