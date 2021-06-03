@@ -1,6 +1,5 @@
 .landingContainer {
   color: white;
-
   display: flex;
   height: 70vh;
   align-items: center;
@@ -26,7 +25,7 @@
 .landingSecondary {
   font-size: 32px;
 
-  color: #9fa2d0;
+  color: var(--light-blue);
 }
 
 .landingCTA {
