@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AuthProvider } from "./../context/AuthProvider"
 import axios from "axios"
 import HeaderWrap from './HeaderWrap';
+import '../styles/directory.css';
 
 export default function ClassPage(props) {
     const id = props.match.params.id
@@ -104,7 +105,7 @@ export default function ClassPage(props) {
     }
 
     if (c === null) {
-        display = <h3 style={{ display: "flex", justifyContent: "center" }}>This class does not exist!</h3>
+        display = <h3 className="d-flex justify-content-center">This class does not exist!</h3>
         fetchClasses();
     }
     else {
@@ -112,22 +113,27 @@ export default function ClassPage(props) {
         teacherName = c.teacher.name;
         teacherEmail = c.teacher.email
         display =
-            <div>
-                <h1 style={{ display: "flex", justifyContent: "center" }}>{name}</h1>
-                <h3 style={{ display: "flex", justifyContent: "center" }}>{teacherName} ({teacherEmail})</h3>
-                <h4 style={{ marginLeft: "2%" }}>Roster</h4>
-                {rosterDisplay()}
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                    {add}
+            <HeaderWrap headerName={name}>
+                <div className="card p-4 m-4">
+                    <div className="row w-100 ml-2 mb-2">
+                        <h2 className="h4 name">Taught By: {teacherName}</h2>
+                    </div>
+                    <div className="row w-100 ml-2">
+                        <div className="h5">
+                         {teacherEmail}
+                         </div>
+                    </div>
+                    <h3 className="d-flex justify-content-center">{teacherName} ({teacherEmail})</h3>
+                    <h4 style={{ marginLeft: "2%" }}>Roster</h4>
+                    {rosterDisplay()}
+                    <div className="d-flex justify-content-center">
+                        {add}
+                    </div>
                 </div>
-            </div>
+            </HeaderWrap>
     }
 
     return (
-        <HeaderWrap headerName="Class Page">
-            <div className="card p-4 m-4">
-                {display}
-            </div>
-        </HeaderWrap>
+        display
     )
 }

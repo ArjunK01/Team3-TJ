@@ -194,7 +194,12 @@
   margin-left: 5px;
 }
 
-.schoolSize svg {
+.schoolSize{
+  display: flex;
+  justify-content: space-between;
+}
+
+.schoolSize {
   height: 24px;
   width: 24px;
   padding: 0;
@@ -205,8 +210,8 @@
   margin-bottom: -2px;
 }
 
-.schoolSize svg:hover {
-  color: black;
+.schoolSize:hover {
+  color: var(--gold) !important;
 }
 
 .dashboardForm {

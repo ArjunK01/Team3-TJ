@@ -37,7 +37,7 @@ const Dashboard = () => {
     });
   };
 
-  const getRosterSize = id => {};
+  const getRosterSize = id => { };
 
   const getTeachers = () => {
     try {
@@ -101,21 +101,7 @@ const Dashboard = () => {
                       {user && user.lastName}!
                     </div>
                     <div className="email text-secondary">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                      {user && user.email}
+                      <i className="fas fa-envelope me-3 mr-1"></i> {user && user.email}
                     </div>
                     <div className="status">
                       {user.isTeacher && (
@@ -138,21 +124,7 @@ const Dashboard = () => {
                           setStudentForm(false);
                         }}
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                          />
-                        </svg>
-                        Add Class
+                      <i class="fas fa-plus mr-2"></i> Add Class
                       </div>
                     )}
                   </div>
@@ -174,6 +146,7 @@ const Dashboard = () => {
                   numClasses={cl.length}
                   numTeachers={teachers.length}
                   numStudents={students.length}
+                  isAdmin={user.isAdmin}
                 />
               </div>
             </div>
