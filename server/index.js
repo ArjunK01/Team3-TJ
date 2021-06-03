@@ -87,6 +87,7 @@ app.post("/classes/addStudent", async (req, res) => {
   if (snapshot.empty) {
     console.log("This student is not enrolled in this school!");
     res.sendStatus(400);
+    return;
   }
 
   await db.collection("Classes").doc(id).collection("Roster").doc(email).set({
