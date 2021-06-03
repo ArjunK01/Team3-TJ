@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import ClassCard from "./ClassCard";
 import Sidebar from "./Sidebar";
 import DashboardForm from "./DashboardForm";
-import HeaderWrap from './HeaderWrap';
+import HeaderWrap from "./HeaderWrap";
 
 import axios from "axios";
 
@@ -22,21 +22,22 @@ const Dashboard = () => {
 
   const [cl, setCl] = useState([]);
 
-  const getClasses = () => {
+  const getClasses = async () => {
     axios.get("http://localhost:8000/classes").then(res => {
       let temp = [];
-      res.data.forEach(c => {
+      res.data.forEach(async c => {
         temp.push({
           classId: c.classID,
           className: c.className,
           teacher: c.teacher.name,
-          size: c.roster ? c.roster.length : 0,
           id: c.id
         });
       });
       setCl(temp);
     });
   };
+
+  const getRosterSize = id => {};
 
   const getTeachers = () => {
     try {
@@ -48,8 +49,6 @@ const Dashboard = () => {
           if (obj.length === 0) {
             setTeachers([]);
           } else {
-            console.log("classes", classes);
-            console.log("teachers", obj);
             setTeachers(obj);
           }
         });
@@ -98,7 +97,8 @@ const Dashboard = () => {
                 <div className="userInfoContainer">
                   <div className="userInfo">
                     <div className="h4 font-weight-bold">
-                      Welcome back, {user && user.firstName} {user && user.lastName}
+                      Welcome back, {user && user.firstName}{" "}
+                      {user && user.lastName}
                     </div>
                     <div className="email text-secondary">
                       <svg
@@ -118,7 +118,9 @@ const Dashboard = () => {
                       {user && user.email}
                     </div>
                     <div className="status">
-                      {user.isTeacher && <div className="isTeacher">Teacher</div>}
+                      {user.isTeacher && (
+                        <div className="isTeacher">Teacher</div>
+                      )}
                       {user.isAdmin && <div className="isAdmin">Admin</div>}
                     </div>
                   </div>
@@ -127,7 +129,7 @@ const Dashboard = () => {
                   <div className="classListHeaderContainer">
                     <div className="classListHeader">
                       Classes at TJ Elementary School
-            </div>
+                    </div>
                     {user.isAdmin && (
                       <div
                         className="addClassBtn"
@@ -150,7 +152,7 @@ const Dashboard = () => {
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                           />
                         </svg>
-                Add Class
+                        Add Class
                       </div>
                     )}
                   </div>
