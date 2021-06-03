@@ -98,7 +98,7 @@ const Dashboard = () => {
                   <div className="userInfo">
                     <div className="h4 font-weight-bold">
                       Welcome back, {user && user.firstName}{" "}
-                      {user && user.lastName}
+                      {user && user.lastName}!
                     </div>
                     <div className="email text-secondary">
                       <svg
