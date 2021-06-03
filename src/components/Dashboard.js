@@ -92,7 +92,7 @@ const Dashboard = () => {
     <HeaderWrap headerName="Dashboard" dashboard={true}>
       <div className="card m-2 p-4">
         <div className="tbg">
-          <div className="container-fluid pr-2 pl-4 py-4">
+          <div className="container-fluid px-4 py-4">
             <div className="dashboardContainer">
               <div className="leftContainer">
                 <div className="userInfoContainer">
