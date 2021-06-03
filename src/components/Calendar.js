@@ -82,15 +82,14 @@ export default function Calendar() {
           />
 
         </div>
-        <div style={{textAlign:"center"}}>
+        <div  className="text-center">
         {user.isAdmin && <h4>To Add An Event Enter Date And Description</h4>}
-       {user.isAdmin && <Button variant="contained" color="primary" onClick={()=>setAdd(true)}>Add An Event</Button>}
+       {user.isAdmin &&  <button type="button" class="btn btn-lite" onClick={()=>setAdd(true)}>Add An Event</button>} 
        {add && user.isAdmin && <form onSubmit = {addEvent}>
         <input id = "date" type = "text" placeholder = "Enter date here"/>
         <input id = "description" type = "text" placeholder = "Enter description here"/>
         <input type = "submit"/>
         </form>}
-
       </div>
       </HeaderWrap>
     </div>
