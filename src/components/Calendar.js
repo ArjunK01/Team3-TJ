@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction"
 import HeaderWrap from './HeaderWrap';
 import axios from "axios"
 import { AuthContext } from "../context/AuthProvider";
@@ -87,10 +87,18 @@ export default function Calendar() {
             header={{
               left: "prev,next",
               center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay"
+              right: "dayGridMonth,timeGridWeek"
             }}
-            plugins={[dayGridPlugin, timeGridPlugin]}
+            plugins={[dayGridPlugin, interactionPlugin]}
             events={events}
+            // events = {events.map((event) => {
+            //     return {
+            //       title: event.description,
+            //       start: event.date,
+            //       eventID: event.id
+            //     };
+            //   })
+            // }
           />
         </div>
 
