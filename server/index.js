@@ -211,18 +211,13 @@ app.post("/events/add", async (req, res) => {
 
   let query = db.collection("Events");
   const snapshot = await query.get();
-  if (snapshot.empty) {
     const resp = await db.collection("Events").add({
-      date,
-      description
+      date: date,
+      description: description
     });
     console.log("Added " + description + " on " + date);
     res.sendStatus(200);
-  } else {
-    res.sendStatus(400);
-    console.log("This " + eventType + " is already in the database!");
-  }
-});
+  });
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}...`);
