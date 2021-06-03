@@ -138,6 +138,35 @@ app.post("/classes/addStudent", async (req, res) => {
   res.sendStatus(200);
 });
 
+app.put("/classes/editTeacher", async (req, res) => {
+  let {id, email, fName, lName} = req.body;
+  let query = db.collection("Staff").where("email", "==", email);
+  const snapshot = await query.get();
+  if (snapshot.empty) {
+    console.log("This teacher does not work at this school!");
+    res.sendStatus(404);
+    return;
+  }
+  let staff;
+  snapshot.forEach(t => {
+    staff = t.data();
+  })
+  console.log(staff)
+  if(!staff.isTeacher) {
+    console.log("This staff member is not a teacher!");
+    res.sendStatus(400);
+    return
+  }
+  let ref = db
+    .collection("Classes")
+    .doc(id)
+  ref.update({
+    "teacher.name": fName + " " + lName,
+    "teacher.email": email
+  })
+  res.sendStatus(200);
+});
+
 app.get("/events", async (req, res) => {
   const snapshot = await db.collection("Events").get();
 
