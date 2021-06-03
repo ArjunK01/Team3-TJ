@@ -1,0 +1,253 @@
+.tbg {
+  background-color: white;
+}
+.tempContainer {
+  max-width: 1100px;
+  margin: 0px auto;
+  justify-content: space-between;
+  margin-top: 32px;
+  background-color: white;
+  color: black;
+}
+
+.dashboardContainer {
+  display: flex;
+  max-width: 1100px;
+  margin: 0px auto;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.userInfoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerDash {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.email {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 9px;
+}
+
+.email svg {
+  margin-right: 6px;
+  height: 24px;
+  width: 24px;
+}
+
+.otherInfo {
+  display: flex;
+  align-items: center;
+}
+
+.status {
+  display: flex;
+  height: 70%;
+}
+
+.status > * {
+  background-color: var(--gold);
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  color: white;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 2px 10px;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.classListHeader {
+  font-size: 20px;
+  margin-bottom: -8px;
+}
+
+.classListHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.addClassBtn {
+  background-color: var(--navy);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+}
+
+.addClassBtn:hover{
+  background: var(--gold);
+}
+
+.addClassBtn svg {
+  height: 18px;
+  width: 18px;
+  margin-right: 3px;
+}
+
+.cList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+}
+
+.classCard {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 3px 0 hsla(0, 0%, 0%, 0.1);
+  border-radius: 4px;
+  padding: 12px;
+  height: 125px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.classCard:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.classId {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.className {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: -4px;
+}
+
+.cardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardBottom svg {
+  height: 20px;
+  width: 20px;
+  color: #7d7d7d;
+}
+
+.sidebar {
+  border-left: 1px solid #e5e5e5;
+  padding-left: 24px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarHeader {
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.sidebarInfo {
+  font-size: 1.3rem;
+}
+
+.sidebarInfo span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-left: 5px;
+}
+
+.schoolSize {
+  display: flex;
+  align-items: baseline;
+}
+
+.schoolSize svg {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  margin-left: 8px;
+  color: #7d7d7d;
+  align-self: flex-end;
+  cursor: pointer;
+  margin-bottom: -2px;
+}
+
+.schoolSize svg:hover {
+  color: black;
+}
+
+.dashboardForm {
+  margin-top: 32px;
+}
+
+.genderPick {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gender {
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  align-items: center;
+  padding: 6px;
+}
+
+.dashSubmitBtn {
+  background-color: var(--navy);
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 16px;
+  margin-top: 12px;
+}
+
+.dashSubmitBtn:hover{
+  background: var(--gold);
+}

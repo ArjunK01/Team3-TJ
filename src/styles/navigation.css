@@ -1,0 +1,12 @@
+.navbar {
+    background-color: var(--light-navy) !important;
+}
+
+.navbar-dark a {
+    color: var(--white) !important;
+    letter-spacing: 0.7px;
+}
+
+.nav-item:hover {
+    opacity: 0.7;
+}

@@ -1,11 +1,8 @@
 import React, {useState} from "react";
 import {AuthProvider} from "./../context/AuthProvider"
 import axios from "axios"
-<<<<<<< Updated upstream
-=======
 import HeaderWrap from './HeaderWrap';
 // import {response} from "express"
->>>>>>> Stashed changes
 
 export default function ClassPage(props) {
     const id = props.match.params.id
@@ -22,32 +19,6 @@ export default function ClassPage(props) {
         const url = new URL("http://localhost:8000/classes");
 
         fetch(url)
-<<<<<<< Updated upstream
-        .then((resp) => {
-            return(resp.json());
-        })
-        .then((obj) => {
-            console.log(obj);
-            for(let element of obj) {
-                if(element.classID === id)
-                {
-                    setClass(element);
-                    const url2 = new URL("http://localhost:8000/classes/roster");
-                    url2.searchParams.append("id", element.id);
-                    fetch(url2)
-                    .then((res) => {
-                        return(res.json());
-                    })
-                    .then((result) => {
-                        setRoster(result);
-                    })
-                    setAdd(<button onClick = {generateForm}>Add a student!</button>)
-                    break;
-                }
-                else
-                    name = "This class does not exist!"  
-            } //ends for
-=======
             .then((resp) => {
                 return (resp.json());
             })
@@ -72,7 +43,6 @@ export default function ClassPage(props) {
                     else
                         name = "This class does not exist!"
                 } //ends for
->>>>>>> Stashed changes
 
         }) //ends then
     } //ends fetchClasses
@@ -165,6 +135,11 @@ export default function ClassPage(props) {
     }
 
     return(
-        display
+        <HeaderWrap headerName="Class Page">
+            <div className="card p-4 m-4">
+                {display}
+            </div>
+        </HeaderWrap>
+
     )
 }

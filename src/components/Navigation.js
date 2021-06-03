@@ -12,12 +12,13 @@ import firebase from "../firebase";
 import { AuthContext } from "../context/AuthProvider";
 import ClassPage from "./ClassPage"
 
-import Home from "./Home";
 import StudentDirectory from "./StudentDirectory";
 import TeacherDirectory from "./TeacherDirectory";
 import Calendar from "./Calendar"
 
 import { ClassesContext } from "../context/ClassesProvider";
+
+import '../styles/navigation.css'
 
 const Navigation = () => {
   let { user } = useContext(AuthContext);
@@ -46,9 +47,9 @@ const Navigation = () => {
     <div>
       <Router>
         {/* NAVBAR */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link className="navbar-brand" to="/">
-            TJ Elementary School
+            TJ ELEMENTARY
           </Link>
           <button
             className="navbar-toggler"
@@ -83,7 +84,7 @@ const Navigation = () => {
                   <Link className="nav-link" to="/calendar">
                     Calendar
                   </Link>
-                </li>{" "}
+                </li>
                 <li className="nav-item">
                   <Link
                     className="nav-link"
@@ -92,7 +93,7 @@ const Navigation = () => {
                   >
                     Sign Out
                   </Link>
-                </li>{" "}
+                </li>
               </ul>
             ) : (
               <ul className="navbar-nav">
@@ -127,8 +128,8 @@ const Navigation = () => {
             exact
             component={Calendar}
           ></Route>
-          
-          <Route path="/class/:id" component = {ClassPage}>
+
+          <Route path="/class/:id" component={ClassPage}>
             {
               //Change to component, class page
             }
@@ -138,16 +139,9 @@ const Navigation = () => {
               //Change to component, student page
             }
           </Route>
-          <Route path="/dashboard">
-            {
-              //Change to component
-            }
-            <Dashboard />
+          <Route path="/dashboard" exact component={Dashboard}>
           </Route>
           <Route path="/login">
-            {
-              //Change to component
-            }
             {user ? <Redirect to="/dashboard" /> : <Auth />}
           </Route>
           <Route path="/">

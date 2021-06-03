@@ -1,0 +1,68 @@
+:root {
+  --navy: #2a2f74;
+  --light-navy: #697aaa;
+  --light-blue: #c1d1e7;
+  --white: #ffffff;
+  --gold: #aa8317;
+  --light-gold: #f3deb2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cantarell', sans-serif;
+  background: var(--navy);
+  color: var(--navy);
+}
+
+.header{
+  color: var(--white);
+}
+
+.btn-light {
+  background: var(--light-gold);
+  color: var(--navy);
+  font-weight: bold;
+  border-width: 0.2rem;
+  border-color: var(--light-gold);
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+}
+
+.btn-dark {
+  background: var(--navy);
+  color: var(--white);
+  font-weight: bold;
+  border-width: 0.2rem;
+  border-color: var(--navy);
+  background-color: var(--navy);
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--gold);
+  color: var(--white);
+  font-weight: bold;
+  border-width: 0.2rem;
+  border-color: var(--gold);
+}
+
+
