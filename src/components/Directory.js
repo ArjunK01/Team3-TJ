@@ -44,7 +44,9 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                             </div>
                         </div>
                     }) :
-                        <Loading />
+                        <div>
+                            <Loading />
+                        </div>
                     }
                 </div>
             </HeaderWrap>
