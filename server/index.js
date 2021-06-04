@@ -25,6 +25,15 @@ app.get("/students", async (req, res) => {
   res.send(students);
 });
 
+app.get("/student", async (req, res) => {
+  const snapshot = await db
+    .collection("Students")
+    .doc(req.query.id)
+    .get()
+    .then(resp => res.send({ ...resp.data(), id: resp.id }))
+    .catch(err => res.sendStatus(400));
+});
+
 app.get("/staff", async (req, res) => {
   const snapshot = await db.collection("Staff").get();
 
@@ -212,13 +221,13 @@ app.post("/events/add", async (req, res) => {
 
   let query = db.collection("Events");
   const snapshot = await query.get();
-    const resp = await db.collection("Events").add({
-      date: date,
-      description: description
-    });
-    console.log("Added " + description + " on " + date);
-    res.sendStatus(200);
+  const resp = await db.collection("Events").add({
+    date: date,
+    description: description
   });
+  console.log("Added " + description + " on " + date);
+  res.sendStatus(200);
+});
 
   app.delete("events/delete", async (req, res) => {
     const { id } = req.body;
