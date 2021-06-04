@@ -38,7 +38,7 @@ const ClassCard = ({ c, user }) => {
     >
       <div className="classId">{c.classId}</div>
       <div className="className mb-1">{c.className}</div>
-      <div className="classTeacher">Teacher: {c.teacher}</div>
+      <div className="classTeacher ">Teacher: {c.teacher}</div>
       <div className="cardBottom">
         <div className="classSize text-secondary">{size} Students</div>
         {user && user.isAdmin && (
