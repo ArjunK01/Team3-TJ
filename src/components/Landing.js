@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/base.css";
 import "../styles/landing.css";
-import image from "../images/slug.png";
+import image from "../images/slug2.png";
 import { useHistory } from "react-router-dom";
 
 const Landing = () => {
