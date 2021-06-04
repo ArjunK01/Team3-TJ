@@ -130,15 +130,12 @@ app.post("/classes/addStudent", async (req, res) => {
 
   console.log(id);
 
-
   const snapshot = await query.get();
   if (snapshot.empty) {
     console.log("This student is not enrolled in this school!");
     res.sendStatus(400);
     return;
   }
-
-
   await db
     .collection("Classes")
     .doc(id)
@@ -178,6 +175,18 @@ app.put("/classes/editTeacher", async (req, res) => {
   ref.update({
     "teacher.name": fName + " " + lName,
     "teacher.email": email
+  })
+  res.sendStatus(200);
+});
+
+app.put("/classes/editClass", async (req, res) => {
+  let {id, className, classID} = req.body;
+  let ref = db
+    .collection("Classes")
+    .doc(id)
+  ref.update({
+    classID: classID,
+    className: className
   })
   res.sendStatus(200);
 });

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {AuthProvider} from "./../context/AuthProvider"
 import axios from "axios"
 import HeaderWrap from './HeaderWrap';
+import { useHistory } from "react-router-dom";
 
 import '../styles/directory.css';
 import '../styles/base.css';
@@ -9,11 +10,13 @@ import '../styles/classPage.css'
 
 
 export default function ClassPage(props) {
+    const history = useHistory();
     const id = props.match.params.id
     const [c, setClass] = useState(null)
     const [roster, setRoster] = useState([]);
     const [add, setAdd] = useState();
     const [changeTeacher, setChangeTeacher] = useState();
+    const [changeClass, setChangeClass] = useState();
     let docID;
     let display;
     let name = "This class does not exist!" 
@@ -51,6 +54,11 @@ export default function ClassPage(props) {
                             <button onClick = {generateTeacherChange} className = "btn btn-dark" style = {{marginLeft: "16px", alignContent: "center"}}>
                                 <i className="fas fa-edit"></i>
                             </button>)
+                        setChangeClass(
+                            <button onClick = {generateClassChange} className = "btn btn-dark mb-4" >
+                                Edit Class Info
+                            </button>)
+
                         break;
                     }
                     else
@@ -158,6 +166,55 @@ export default function ClassPage(props) {
         </div>)
     }
 
+    const editClass = (e) => {
+        e.preventDefault()
+        let cName = document.getElementById("className").value;
+        let cID = document.getElementById("classID").value;
+
+        if(cName === "") {
+            alert("Enter a class name!");
+            return;
+        }
+        if(cID === "") {
+            alert("Enter a class ID!");
+            return;
+        }
+        
+        axios
+            .put("http://localhost:8000/classes/editClass", {id: docID, className: cName, classID: cID})
+            .then(
+                (response) => {
+                    console.log(props.match.params.id);
+                    history.push("/class/" + cID);
+                    window.location.reload();
+                },
+            )
+            .catch(error => {
+                if(error.response.status === 404)
+                    alert("There is no teacher with this email at this school!")
+                else
+                    alert("This staff member is not a teacher!")
+            })
+    }
+
+    const generateClassChange = (e) => {
+        setChangeClass(<div > <br/>
+            <form className = "form-inline" onSubmit = {editClass}>
+                <div className = "form-group">
+                    <div className = "container-fluid mb-4">
+                        <div className = "row">
+                            <input  className = "form-control mb-3 mr-2" id = "className" type = "text" placeholder = "Enter class name" />
+                            <input className = "form-control mb-3" id = "classID" type = "text" placeholder = "Enter class ID"/>
+                        </div>
+                        <div className = "row">
+                            <input className = "btn btn-dark" type = "submit"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>)
+    }
+
     const removeStudent = (e) => {
         const email = e.target.name
         axios
@@ -219,6 +276,9 @@ export default function ClassPage(props) {
             <HeaderWrap headerName={name}>
                 <div className="card p-4 m-4">
                     <div className="m-4">
+                        <div className="row w-100 ml-2">
+                            {changeClass}
+                        </div>
                         <div className="row w-100 ml-2">
                             <h2 className="h5 name">Taught By: {teacherName}</h2>
                         </div>
