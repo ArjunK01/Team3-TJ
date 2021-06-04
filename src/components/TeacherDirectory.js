@@ -7,8 +7,7 @@ const TeacherDirectory = () => {
     const [teachers, setTeachers] = useState([]);
     const { classes } = useContext(ClassesContext);
     const fields = [
-        { "name": "Email", "val": "email" },
-        { "name": "Birthday", "val": "birthday" }
+        { "name": "Email", "val": "email" }
     ];
 
     useEffect(() => {
