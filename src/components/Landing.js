@@ -15,7 +15,7 @@ const Landing = () => {
             Log in to access the staff portal
           </div>
           <div
-            className="landingCTA btn btn-light"
+            className="landingCTA btn-light"
             onClick={() => history.push(`/login`)}
           >
             Log In

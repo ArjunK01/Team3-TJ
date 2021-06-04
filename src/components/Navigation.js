@@ -20,6 +20,8 @@ import { ClassesContext } from "../context/ClassesProvider";
 
 import "../styles/navigation.css";
 import Landing from "./Landing";
+import { getSectionHasLiquidHeight } from "@fullcalendar/react";
+import StudentPage from "./StudentPage";
 
 const Navigation = () => {
   let { user } = useContext(AuthContext);
@@ -135,6 +137,7 @@ const Navigation = () => {
             {
               //Change to component, student page
             }
+            <StudentPage />
           </Route>
           <Route path="/dashboard" exact component={Dashboard}></Route>
           <Route path="/login">
