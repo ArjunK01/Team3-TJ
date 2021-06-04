@@ -108,9 +108,7 @@ export const AuthForm = ({ login }) => {
             className="teacherStatus"
             onClick={() => setIsTeacher(teacher => !teacher)}
             style={{
-              backgroundColor: isTeacher ? "#EAECEF" : null,
-              color: isTeacher ? "#495057" : "#6D757D",
-              border: isTeacher ? null : "1px solid #ced4da"
+              backgroundColor: isTeacher ? "#697aaa" : null,
             }}
           >
             Teacher
@@ -119,9 +117,7 @@ export const AuthForm = ({ login }) => {
             className="adminStatus"
             onClick={() => setIsAdmin(admin => !admin)}
             style={{
-              backgroundColor: isAdmin ? "#EAECEF" : null,
-              color: isAdmin ? "#495057" : "#6D757D",
-              border: isAdmin ? null : "1px solid #ced4da"
+              backgroundColor: isAdmin ? "#697aaa" : null,
             }}
           >
             Admin
