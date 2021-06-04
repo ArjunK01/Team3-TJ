@@ -48,8 +48,8 @@ export default function ClassPage(props) {
                                 <i className="fas fa-plus mr-2"></i>Add student
                             </button>)
                         setChangeTeacher(
-                            <button onClick = {generateTeacherChange} className = "btn btn-dark">
-                                <i className="fas fa-plus mr-2"></i>Edit Info
+                            <button onClick = {generateTeacherChange} className = "btn btn-dark" style = {{marginLeft: "16px", alignContent: "center"}}>
+                                <i className="fas fa-edit"></i>
                             </button>)
                         break;
                     }
@@ -135,12 +135,18 @@ export default function ClassPage(props) {
     }
 
     const generateTeacherChange = (e) => {
-        setChangeTeacher(<form onSubmit = {editTeacher}>
-            <input id = "tFName" type = "text" placeholder = "Enter updated first name here" />
-            <input id = "tLName" type = "text" placeholder = "Enter updated last name here"/>
-            <input id = "tEmail" type = "text" placeholder = "Enter updated teacher email here"/>
-            <input type = "submit"/>
-        </form>)
+        setChangeTeacher(<div> <br/>
+            <form className = "form-inline" onSubmit = {editTeacher} style = {{float: "left"}}>
+                <div className = "form-group">
+                    <input style = {{marginLeft: "16px"}} className = "form-control mb-3" id = "tFName" type = "text" placeholder = "Enter first name here" />
+                    <input style = {{marginLeft: "16px"}} className = "form-control mb-3" id = "tLName" type = "text" placeholder = "Enter last name here"/>
+                    <input style = {{marginLeft: "16px"}} className = "form-control mb-3" id = "tEmail" type = "text" placeholder = "Enter teacher email here"/>
+                    <div className = "text-top" style = {{marginTop: "-2%", float: "right"}}>
+                        <input style = {{marginLeft: "8px", padding: "7.1%"}} className = "btn btn-dark" type = "submit"/>
+                    </div>
+                </div>
+            </form>
+        </div>)
     }
 
     const removeStudent = (e) => {
@@ -176,11 +182,15 @@ export default function ClassPage(props) {
     }
 
     const generateForm = (e) => {
-        setAdd(<form onSubmit = {addStudent}>
-            <input id = "name" type = "text" placeholder = "Enter student name here"/>
-            <input id = "email" type = "text" placeholder = "Enter student email here"/>
-            <input id = "grade" type = "text" placeholder = "Enter student grade here"/>
-            <input type = "submit"/>
+        setAdd(<form className = "form-inline" onSubmit = {addStudent}>
+            <div className = "form-group">
+                <input style = {{marginLeft: "16px"}} className = "form-control mb-3" id = "name" type = "text" placeholder = "Enter student name"/>
+                <input style = {{marginLeft: "16px"}} className = "form-control mb-3" id = "email" type = "text" placeholder = "Enter student email"/>
+                <input style = {{marginLeft: "16px"}} className = "form-control mb-3" id = "grade" type = "text" placeholder = "Enter student grade"/>
+                <div className = "text-top" style = {{marginTop: "-2%", float: "right"}}>
+                    <input style = {{marginLeft: "8px", padding: "7.1%"}} className = "btn btn-dark" type = "submit" value = "Update!" /*style = {{backgroundColor: "navy", justifyContent: "center", color: "white", textTransform: "uppercase", cursor: "pointer", borderRadius: "3px"}}*//>
+                </div>
+            </div>
         </form>)
     }
 
