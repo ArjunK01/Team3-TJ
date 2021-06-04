@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import axios from "axios";
+
 import NavigateButton from './NavigateButton';
 import ClassList from './ClassList';
 import HeaderWrap from './HeaderWrap';
 import Loading from './Loading';
+
+import { RostersContext } from "../context/RostersProvider";
+import { ClassesContext } from "../context/ClassesProvider";
+
 import '../styles/directory.css';
 
 const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
+    const { rosters, setRosters, rerender, setRerender } = useContext(RostersContext);
+    const { classes } = useContext(ClassesContext);
+
+    //Set rosters context
+    useEffect(() => {
+        console.log("delayed use effec", classes);
+        if (classes) {
+            if (classes.length > 0) {
+                classes.forEach(async cl => {
+                    let res = await axios.get(
+                        "http://localhost:8000/classes/roster?id=" + cl.id
+                    );
+                    let classRoster = [];
+                    res.data.forEach(stu => {
+                        classRoster.push(stu);
+                    });
+                    rosters.push({ "id": cl.id, "roster": classRoster })
+                });
+                setRosters(rosters);
+            }
+        }
+    }, [classes, rerender]);
+
+    useEffect(() => {
+        setTimeout(setRerender(r => !r), 2000);
+        console.log("timeout useEffec")
+
+    }, []);
+
     return (
         <div>
             <HeaderWrap headerName={`${headerName} Directory`}>
@@ -21,15 +56,6 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                                         {fields && fields.map((field) => {
                                             return <div className="row" key={field.name}>{field.name}: {person[field.val] ? person[field.val] : "N/A"}</div>
                                         })}
-                                        <div className="row w-100 ml-4">
-                                            <div className="container row">{classListHeader}:</div>
-                                            <div className="container-fluid">
-                                                <ClassList
-                                                    email={person.email}
-                                                    person={headerName === "Student" ? "student" : "teacher"}
-                                                />
-                                            </div>
-                                        </div>
                                     </div>
                                     {headerName === "Student" &&
                                         <div className="row justify-content-left mt-3 ml-2">
@@ -53,5 +79,15 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
         </div>
     )
 }
+
+// <div className="row w-100 ml-4">
+//     <div className="container row">{classListHeader}:</div>
+//     <div className="container-fluid">
+//         <ClassList
+//             email={person.email}
+//             person={headerName === "Student" ? "student" : "teacher"}
+//         />
+//     </div>
+// </div>
 
 export default Directory
