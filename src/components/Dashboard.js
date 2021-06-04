@@ -80,7 +80,6 @@ const Dashboard = () => {
     getClasses();
     getTeachers();
     getStudents();
-    console.log("EJHREERES");
   }, [classes, rerender]);
 
   if (!user) {
