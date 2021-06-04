@@ -150,7 +150,7 @@ app.put("/classes/editTeacher", async (req, res) => {
   const snapshot = await query.get();
   if (snapshot.empty) {
     console.log("This teacher does not work at this school!");
-    res.status(400).send("Teacher not employed");
+    res.status(404).send("Teacher not employed");
     return;
   }
   let staff;
