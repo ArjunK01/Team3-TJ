@@ -56,6 +56,15 @@ const Directory = ({ headerName, classListHeader, peopleList, fields }) => {
                                         {fields && fields.map((field) => {
                                             return <div className="row" key={field.name}>{field.name}: {person[field.val] ? person[field.val] : "N/A"}</div>
                                         })}
+                                        {headerName === "Teacher" && <div className="row w-100 ml-4">
+                                            <div className="container row">{classListHeader}:</div>
+                                            <div className="container-fluid">
+                                                <ClassList
+                                                    email={person.email}
+                                                    person={headerName === "Student" ? "student" : "teacher"}
+                                                />
+                                            </div>
+                                        </div>}
                                     </div>
                                     {headerName === "Student" &&
                                         <div className="row justify-content-left mt-3 ml-2">
