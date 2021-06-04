@@ -79,14 +79,13 @@
 .statusInput > * {
   width: 48%;
   cursor: pointer;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--light-navy);
   display: flex;
   justify-content: center;
   padding: 5px 0px;
   border-radius: 3px;
-  color: var(--navy) !important;
-  font-weight: bold;
-  background: var(--light-blue);
+
+  color: white;
 }
 
 .errorMessage {
