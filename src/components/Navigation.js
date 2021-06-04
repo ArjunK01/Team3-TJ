@@ -27,6 +27,7 @@ const Navigation = () => {
   let { user } = useContext(AuthContext);
   const { setClasses } = useContext(ClassesContext);
 
+  //Set classes context
   useEffect(() => {
     try {
       fetch(`http://localhost:8000/classes`)
