@@ -53,7 +53,6 @@ export default function Calendar() {
   }
 
   const removeEvent = (e) => {
-
     axios
       .delete("http://localhost:8000/events/delete", {data: {}})
       .then((response) => {
