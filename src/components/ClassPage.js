@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import {AuthProvider} from "./../context/AuthProvider"
 import axios from "axios"
 import HeaderWrap from './HeaderWrap';
+
 import '../styles/directory.css';
 import '../styles/base.css';
+import '../styles/classPage.css'
 
 
 export default function ClassPage(props) {
@@ -43,11 +45,11 @@ export default function ClassPage(props) {
                             })
                         setAdd(
                             <button onClick={generateForm} className="btn btn-dark">
-                                <i class="fas fa-plus mr-2"></i>Add student
+                                <i className="fas fa-plus mr-2"></i>Add student
                             </button>)
                         setChangeTeacher(
                             <button onClick = {generateTeacherChange} className = "btn btn-dark">
-                                <i class="fas fa-plus mr-2"></i>Edit Info
+                                <i className="fas fa-plus mr-2"></i>Edit Info
                             </button>)
                         break;
                     }
@@ -61,25 +63,24 @@ export default function ClassPage(props) {
     const rosterDisplay = () => {
         if(roster.length === 0)
             return;
-        console.log("\nList names:\n", roster)
         const nameList = <div className="info w-100">
             {roster.map((cl) => (
-                <div className="container-fluid border-bottom">
+                <div className="container-fluid border-bottom" key={cl.id}>
                     <div className="container-fluid p-3">
-                        <div className="row" key={cl.id}>
+                        <div className="row">
                             <div className="font-weight-bold name">{cl.name}</div>
                         </div>
                         <div className="row w-100 m-2">
                             Email: {cl.id}
                         </div>
-                        <div className="container-fluid w-100 m-2">
-                            <div className="row">
+                        <div className="container-fluid w-100 mb-4 mt-2 mx-2">
+                            <div className="row mb-2">
                                 Grade: {cl.grade}
                             </div>
                             <div className="row">
-                                <div className="card">
-                                    <div className="card-title">Change grade</div>
-                                    <div className="btn-group">
+                                <div className="card px-3 py-1">
+                                    <div className="card-title mb-2">Change grade</div>
+                                    <div className="btn-group justify-content-between">
                                         <button className="grade-btn" name={cl.id} value={"😀"} onClick={changeGrade}>😀</button>
                                         <button className="grade-btn" name={cl.id} value={"😐"} onClick={changeGrade}>😐</button>
                                         <button className="grade-btn" name={cl.id} value={"🙁"} onClick={changeGrade}>🙁</button>
@@ -89,7 +90,7 @@ export default function ClassPage(props) {
                         </div>
                         <div className="row w-100 mx-2 mt-3 mb-1">
                             <button name={cl.id} onClick={removeStudent} className="btn btn-dark">
-                                <i class="fas fa-minus mr-2"></i>Remove Student
+                                <i className="fas fa-minus mr-2"></i>Remove Student
                             </button>
                         </div>
                     </div>
@@ -101,26 +102,35 @@ export default function ClassPage(props) {
     }
 
     const editTeacher = (e) => {
+        e.preventDefault();
+        console.log("Name: ", teacherName);
         const names = teacherName.split(" ");
+        console.log(names);
         let fName = document.getElementById("tFName").value;
         let lName = document.getElementById("tLName").value;
+        teacherName = fName + " " + lName;
         let tEmail = document.getElementById("tEmail").value;
 
         if(fName === "" && names[0])
             fName = names[0];
-        if(lName === "" && names[name.length - 1])
-            lName = names[name.length - 1]
+        if(lName === "" && names[names.length - 1])
+            lName = names[names.length - 1]
         if(tEmail === "")
             tEmail = teacherEmail;
+        
         axios
             .put("http://localhost:8000/classes/editTeacher", {id: docID, email: tEmail, fName: fName, lName: lName})
-            .catch(function(error) {
-                e.preventDefault();
-                alert("error");
-                if(error.response) {
-                    console.log(error.response);
-                    alert("This student is not enrolled in the school!");
-                }
+            .then(
+                (response) => {
+                    // fetchClasses();
+                    window.location.reload();
+                },
+            )
+            .catch(error => {
+                if(error.response.status === 404)
+                    alert("There is no teacher with this email at this school!")
+                else
+                    alert("This staff member is not a teacher!")
             })
     }
 
@@ -175,15 +185,12 @@ export default function ClassPage(props) {
     }
 
     useEffect(() => {
-        let mounted = true;
-        if(mounted)
-            fetchClasses();
-        return () => mounted = false;
+        fetchClasses();
     }, [display])
 
     if (c === null) {
+        console.log("here");
         display = <h3 className="d-flex justify-content-center">This class does not exist!</h3>
-        fetchClasses();
     }
     else {
         name = c.className;
