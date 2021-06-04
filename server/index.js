@@ -124,13 +124,20 @@ app.post("/classes/add", async (req, res) => {
 
 app.post("/classes/addStudent", async (req, res) => {
   let { id, email, name, grade } = req.body;
-  if (!grade) grade = "😀";
+  if (!grade || grade !== "😐" || grade !== "🙁" || grade !== "😀") 
+    grade = "😀";
   let query = db.collection("Students").where("email", "==", email);
+
+  console.log(id);
+
+
   const snapshot = await query.get();
   if (snapshot.empty) {
     console.log("This student is not enrolled in this school!");
     res.sendStatus(400);
+    return;
   }
+
 
   await db
     .collection("Classes")
@@ -143,6 +150,35 @@ app.post("/classes/addStudent", async (req, res) => {
     });
 
   console.log("Added", name);
+  res.sendStatus(200);
+});
+
+app.put("/classes/editTeacher", async (req, res) => {
+  let {id, email, fName, lName} = req.body;
+  let query = db.collection("Staff").where("email", "==", email);
+  const snapshot = await query.get();
+  if (snapshot.empty) {
+    console.log("This teacher does not work at this school!");
+    res.status(404).send("Teacher not employed");
+    return;
+  }
+  let staff;
+  snapshot.forEach(t => {
+    staff = t.data();
+  })
+  console.log(staff)
+  if(!staff.isTeacher) {
+    console.log("This staff member is not a teacher!");
+    res.sendStatus(400);
+    return
+  }
+  let ref = db
+    .collection("Classes")
+    .doc(id)
+  ref.update({
+    "teacher.name": fName + " " + lName,
+    "teacher.email": email
+  })
   res.sendStatus(200);
 });
 
