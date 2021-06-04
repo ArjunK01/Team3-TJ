@@ -1,14 +1,14 @@
 # TJ Elementary School Dashboard by Team 3 in Launch 2021 Training
-[Go to website ➥](https://tj-elementary-dashboard.vercel.app)
+[Visit Site ➥](https://tj-elementary-dashboard.vercel.app)
 
 We are using `React.js` and `bootstrap` for the front end and `express` and `Node.js` for the backend.
 
 **Members' Contributions:**
-| Name             | Contributions                                           |
-| ---------------- | ------------------------------------------------------- |
-| Arjun Kumar      | **UX, Authentication, Dashboard, Student Page**         |
-| Kathy Kang       | **UX, Student Directory, Teacher Directory, Deployment**|
-| Mihir Prahlad    | **Backend, Class Page**                                 |
-| Jake Mondschein  | **Backend, Calendar**                                   |
+| Name             | Contributions                                             |
+| ---------------- | --------------------------------------------------------- |
+| Arjun Kumar      | **UX, Authentication, Dashboard, Student Page**           |
+| Kathy Kang       | **UX, Student Directory, Teacher Directory, Deployment**  |
+| Mihir Prahlad    | **Backend, Class Page**                                   |
+| Jake Mondschein  | **Backend, Calendar**                                     |
 
 
