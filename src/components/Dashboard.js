@@ -37,7 +37,7 @@ const Dashboard = () => {
     });
   };
 
-  const getRosterSize = id => { };
+  const getRosterSize = id => {};
 
   const getTeachers = () => {
     try {
@@ -96,12 +96,13 @@ const Dashboard = () => {
               <div className="leftContainer">
                 <div className="userInfoContainer">
                   <div className="userInfo">
-                    <div className="h4 font-weight-bold">
+                    <div className="h4 font-weight-bold mb-0">
                       Welcome back, {user && user.firstName}{" "}
                       {user && user.lastName}!
                     </div>
                     <div className="email text-secondary">
-                      <i className="fas fa-envelope me-3 mr-1"></i> {user && user.email}
+                      <i className="fas fa-envelope me-3 mr-1"></i>{" "}
+                      <span>{user && user.email}</span>
                     </div>
                     <div className="status">
                       {user.isTeacher && (
@@ -124,7 +125,7 @@ const Dashboard = () => {
                           setStudentForm(false);
                         }}
                       >
-                      <i class="fas fa-plus mr-2"></i> Add Class
+                        <i class="fas fa-plus mr-2"></i> Add Class
                       </div>
                     )}
                   </div>

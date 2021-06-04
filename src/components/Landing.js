@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/base.css";
 import "../styles/landing.css";
-import image from "../images/slug.png";
+import image from "../images/slug2.png";
 import { useHistory } from "react-router-dom";
 
 const Landing = () => {
@@ -15,7 +15,7 @@ const Landing = () => {
             Log in to access the staff portal
           </div>
           <div
-            className="landingCTA btn btn-light"
+            className="landingCTA btn-light"
             onClick={() => history.push(`/login`)}
           >
             Log In

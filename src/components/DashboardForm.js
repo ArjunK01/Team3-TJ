@@ -40,7 +40,7 @@ const DashboardForm = ({ f, setStudentForm, setClassForm }) => {
       url: "http://localhost:8000/students/add",
       headers: {},
       data: {
-        email,
+        email: email + "@tjschool.org",
         fName: firstName,
         lName: lastName,
         birthday: b,
@@ -64,7 +64,7 @@ const DashboardForm = ({ f, setStudentForm, setClassForm }) => {
       url: "http://localhost:8000/classes/add",
       headers: {},
       data: {
-        teacherEmail,
+        teacherEmail: teacherEmail + "@tjschool.org",
         teacherName,
         classId,
         className
@@ -80,13 +80,23 @@ const DashboardForm = ({ f, setStudentForm, setClassForm }) => {
     <div className="dashboardForm">
       {f === "student" ? (
         <div>
-          <input
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            type="text"
-            class="form-control mb-3"
-          />
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control authInput"
+              placeholder="Email"
+              aria-label="Email"
+              aria-describedby="basic-addon2"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">
+                @tjschool.org
+              </span>
+            </div>
+          </div>
           <input
             placeholder="First"
             value={firstName}
@@ -168,13 +178,23 @@ const DashboardForm = ({ f, setStudentForm, setClassForm }) => {
             type="text"
             class="form-control mb-3"
           />
-          <input
-            placeholder="Teacher Email"
-            value={teacherEmail}
-            onChange={e => setTeacherEmail(e.target.value)}
-            type="text"
-            class="form-control mb-3"
-          />
+          <div class="input-group mb-2">
+            <input
+              type="text"
+              class="form-control authInput"
+              placeholder="Email"
+              aria-label="Email"
+              aria-describedby="basic-addon2"
+              value={teacherEmail}
+              onChange={e => setTeacherEmail(e.target.value)}
+            />
+
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">
+                @tjschool.org
+              </span>
+            </div>
+          </div>
           <div className="submitCont">
             <div className="dashSubmitBtn" onClick={() => addClass()}>
               Add Class

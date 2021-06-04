@@ -16,6 +16,7 @@ export default function Calendar() {
   const [add, setAdd] = useState(false);
   const { user } = useContext(AuthContext);
   const [remove, setRemove] = useState(false);
+  const [submit, setSubmit] = useState(false)
 
 
 
@@ -45,6 +46,9 @@ export default function Calendar() {
         console.log(response);
       }, (error) => {
         console.log(error);
+      })
+      .then(() => {
+        setSubmit(true);
       });
   }
 
@@ -74,9 +78,12 @@ export default function Calendar() {
     return dayString.replace("YEAR", year).replace("MONTH", month);
   }
   if (!user) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/calendar" />;
   }
 
+  if (submit) {
+    return window.location.reload();
+  }
 
   return (
     <div>
@@ -91,14 +98,7 @@ export default function Calendar() {
             }}
             plugins={[dayGridPlugin, interactionPlugin]}
             events={events}
-            // events = {events.map((event) => {
-            //     return {
-            //       title: event.description,
-            //       start: event.date,
-            //       eventID: event.id
-            //     };
-            //   })
-            // }
+      
           />
         </div>
 

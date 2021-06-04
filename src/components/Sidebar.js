@@ -14,8 +14,8 @@ const Sidebar = ({
 }) => {
   return (
     <div className="sidebar">
-      <div className="sidebarHeader row ml-2">School Overview</div>
-      <div className="sidebarInfo row ml-2">
+      <div className="sidebarHeader row ">School Overview</div>
+      {/* {<div className="sidebarInfo row ml-2">
         {numClasses} <span className="text-secondary ml-2 mt-1">Classes</span>
       </div>
       <div className="sidebarInfo row ml-2">
@@ -24,14 +24,36 @@ const Sidebar = ({
 
       <div className="sidebarInfo row ml-2">
         {numStudents} <span className="text-secondary ml-2 mt-1">students</span>
-        {isAdmin && <div
-          onClick={() => {
-            setStudentForm(f => !f);
-            setClassForm(false);
-          }}
-        >
-          <i class="fas fa-user-plus text-muted schoolSize mr-2"></i>
-        </div>}
+        {isAdmin && (
+          <div
+            onClick={() => {
+              setStudentForm(f => !f);
+              setClassForm(false);
+            }}
+          >
+            <i class="fas fa-user-plus text-muted schoolSize mr-2"></i>
+          </div>
+        )}
+      </div>} */}
+      <div className="overviewContainer">
+        <div className="numClasses">{numClasses}</div>
+        <div className="text-secondary classesText">Classes</div>
+        <div className="numClasses">{numTeachers}</div>
+        <div className="text-secondary classesText">Teachers</div>
+        <div className="numClasses">{numStudents}</div>
+        <div className="text-secondary classesText">
+          Students{" "}
+          {isAdmin && (
+            <div
+              onClick={() => {
+                setStudentForm(f => !f);
+                setClassForm(false);
+              }}
+            >
+              <i class="fas fa-user-plus text-muted schoolSize mr-2"></i>
+            </div>
+          )}
+        </div>
       </div>
       {classForm || studentForm ? (
         <DashboardForm
