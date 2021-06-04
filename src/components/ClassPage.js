@@ -108,13 +108,22 @@ export default function ClassPage(props) {
         console.log(names);
         let fName = document.getElementById("tFName").value;
         let lName = document.getElementById("tLName").value;
-        teacherName = fName + " " + lName;
         let tEmail = document.getElementById("tEmail").value;
 
         if(fName === "" && names[0])
             fName = names[0];
-        if(lName === "" && names[names.length - 1])
-            lName = names[names.length - 1]
+        if(lName === "") {
+            if(!names[names.length - 1] && fName) {
+                alert("Enter a last name!");
+                return;
+            }
+            else {
+                lName = names[names.length - 1];
+                teacherName = fName + " " + lName;
+            }
+        }
+        teacherName = fName + " " + lName;
+
         if(tEmail === "")
             tEmail = teacherEmail;
         
