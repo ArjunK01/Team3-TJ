@@ -4,11 +4,11 @@
 We are using `React.js` and `bootstrap` for the front end and `express`, `Node.js` and `Firebase` for the backend.
 
 **Members' Contributions:**
-| Name             | Contributions                                             |
-| ---------------- | --------------------------------------------------------- |
-| Arjun Kumar      | **UX, Authentication, Dashboard, Student Page**           |
-| Kathy Kang       | **UX, Student Directory, Teacher Directory, Deployment**  |
-| Mihir Prahlad    | **Backend, Class Page**                                   |
-| Jake Mondschein  | **Backend, Calendar**                                     |
+| Name             | Contributions                                    |
+| ---------------- | ----------------------------------------------   |
+| Arjun Kumar      | **UX, Authentication, Dashboard, Student Page**  |
+| Kathy Kang       | **UX, Student Directory, Teacher Directory**     |
+| Mihir Prahlad    | **Backend, Class Page**                          |
+| Jake Mondschein  | **Backend, Calendar**                            |
 
 
